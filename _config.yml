@@ -1,0 +1,93 @@
+# _config.yml
+# Jekyll configuration for СВК Авто website
+# GitHub Pages compatible
+
+# Site settings
+title: "СВК Авто"
+slogan: "Сервис вашего комфорта"
+email: svkauto@mail.ru
+description: >-
+  Техническое обслуживание и ремонт японских и корейских 
+  автомобилей в Москве. Две станции. Ежедневно 09:00–20:00.
+baseurl: ""
+url: "https://svkautoplus.ru"
+
+# Company info
+company:
+  name: "ООО «СВК Авто Плюс»"
+  inn: "7715958669"
+  ogrn: "1137746292265"
+  phone1: "+7 (495) 722‑36‑27"
+  phone2: "+7 (495) 722‑36‑15"
+  hours: "ежедневно 09:00–20:00"
+
+# Locations
+locations:
+  poklonnaya:
+    name: "СВК Авто на Поклонной"
+    address: "Москва, ул. Поклонная, д. 11, стр. 1"
+    metro: "Парк Победы"
+    phone: "+7 (495) 722‑36‑27"
+    lat: 55.7365
+    lng: 37.3785
+  kutuzovsky:
+    name: "СВК Авто на Кутузовском"
+    address: "Москва, Кутузовский пр‑т, д. 88"
+    phone: "+7 (495) 722‑36‑15"
+    lat: 55.7317
+    lng: 37.3512
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: /blog/:year/:month/:day/:title/
+
+# Plugins (GitHub Pages compatible)
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Collections
+collections:
+  services:
+    output: true
+    permalink: /services/:name/
+  locations:
+    output: true
+    permalink: /locations/:name/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "services"
+    values:
+      layout: "service"
+  - scope:
+      path: ""
+      type: "locations"
+    values:
+      layout: "page"
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - worker/
+  - README.md
+  - "*.gemspec"
+
+# Sass
+sass:
+  style: compressed
+
+# Timezone
+timezone: Europe/Moscow

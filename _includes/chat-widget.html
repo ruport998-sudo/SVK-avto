@@ -1,0 +1,269 @@
+<!-- _includes/chat-widget.html -->
+<!-- AI Online Consultant Widget -->
+<div id="chat-widget" class="chat-widget" role="complementary" aria-label="Онлайн-консультант">
+  <!-- Floating button -->
+  <button 
+    id="chat-toggle" 
+    class="chat-toggle"
+    aria-expanded="false"
+    aria-controls="chat-panel"
+    aria-label="Открыть чат с консультантом"
+  >
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+    </svg>
+    <span class="chat-toggle-text">Консультант</span>
+  </button>
+  
+  <!-- Chat panel -->
+  <div id="chat-panel" class="chat-panel" hidden>
+    <header class="chat-header">
+      <h3>Онлайн-консультант</h3>
+      <button 
+        id="chat-close" 
+        class="chat-close"
+        aria-label="Закрыть чат"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </header>
+    
+    <div id="chat-messages" class="chat-messages" role="log" aria-live="polite">
+      <!-- Initial greeting -->
+      <div class="chat-message chat-message-bot">
+        <p>Здравствуйте! Я онлайн-консультант СВК Авто. Чем могу помочь?</p>
+      </div>
+      
+      <!-- Location selection (step 1) -->
+      <div id="chat-location-step" class="chat-step">
+        <p class="chat-step-text">Выберите ваш район:</p>
+        <div class="chat-quick-buttons">
+          <button class="chat-quick-btn" data-location="center">Я в центре Москвы</button>
+          <button class="chat-quick-btn" data-location="northwest">Я на северо-западе (Кунцево/Крылатское/Строгино)</button>
+          <button class="chat-quick-btn" data-location="other">Другой район</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Input area -->
+    <div id="chat-input-area" class="chat-input-area" hidden>
+      <div class="chat-quota">
+        <span id="chat-quota-text">Осталось вопросов: 5</span>
+      </div>
+      
+      <!-- Turnstile container -->
+      <div id="turnstile-container" class="turnstile-container"></div>
+      
+      <form id="chat-form" class="chat-form">
+        <input 
+          type="text" 
+          id="chat-input" 
+          class="chat-input"
+          placeholder="Введите ваш вопрос..."
+          autocomplete="off"
+          aria-label="Ваш вопрос"
+        >
+        <button type="submit" class="chat-send" aria-label="Отправить">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="22" y1="2" x2="11" y2="13"/>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          </svg>
+        </button>
+      </form>
+    </div>
+    
+    <!-- Limit reached message -->
+    <div id="chat-limit" class="chat-limit" hidden>
+      <p>Лимит вопросов исчерпан.</p>
+      <p>Позвоните нам: <a href="tel:+74957223627">+7 (495) 722‑36‑27</a></p>
+      <a href="/contacts/" class="btn btn-primary btn-sm">Оставить заявку</a>
+    </div>
+  </div>
+</div>
+
+<!-- Turnstile script (loaded on demand) -->
+<script>
+  // Chat widget state
+  const chatState = {
+    isOpen: false,
+    quota: 5,
+    turnstileToken: null,
+    location: null,
+    messages: [],
+    visitorId: null
+  };
+  
+  // DOM elements
+  const chatToggle = document.getElementById('chat-toggle');
+  const chatPanel = document.getElementById('chat-panel');
+  const chatClose = document.getElementById('chat-close');
+  const chatMessages = document.getElementById('chat-messages');
+  const chatInputArea = document.getElementById('chat-input-area');
+  const chatForm = document.getElementById('chat-form');
+  const chatInput = document.getElementById('chat-input');
+  const chatQuotaText = document.getElementById('chat-quota-text');
+  const chatLimit = document.getElementById('chat-limit');
+  const locationStep = document.getElementById('chat-location-step');
+  
+  // Check localStorage for closed state
+  const chatClosedUntil = localStorage.getItem('chatClosedUntil');
+  if (chatClosedUntil && Date.now() < parseInt(chatClosedUntil)) {
+    chatToggle.style.display = 'none';
+  }
+  
+  // Toggle chat
+  chatToggle.addEventListener('click', () => {
+    chatState.isOpen = !chatState.isOpen;
+    chatPanel.hidden = !chatState.isOpen;
+    chatToggle.setAttribute('aria-expanded', chatState.isOpen);
+    
+    if (chatState.isOpen) {
+      loadTurnstile();
+    }
+  });
+  
+  // Close chat
+  chatClose.addEventListener('click', () => {
+    chatState.isOpen = false;
+    chatPanel.hidden = true;
+    chatToggle.setAttribute('aria-expanded', 'false');
+    
+    // Don't show for 7 days
+    const sevenDays = Date.now() + (7 * 24 * 60 * 60 * 1000);
+    localStorage.setItem('chatClosedUntil', sevenDays.toString());
+  });
+  
+  // Location selection
+  document.querySelectorAll('.chat-quick-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const location = e.target.dataset.location;
+      chatState.location = location;
+      
+      // Hide location step
+      locationStep.hidden = true;
+      
+      if (location === 'other') {
+        // Show non-Moscow message
+        addMessage('bot', 'Мы специализируемся на обслуживании клиентов в центре и на северо-западе Москвы. Ближайшие к вам сервисы можно найти на картах. Если вы готовы приехать к нам — с удовольствием поможем!');
+        chatInputArea.hidden = false;
+      } else {
+        // Show input
+        chatInputArea.hidden = false;
+        addMessage('bot', 'Отлично! Задайте ваш вопрос. У вас есть 5 бесплатных вопросов.');
+      }
+    });
+  });
+  
+  // Load Turnstile
+  function loadTurnstile() {
+    if (window.turnstileLoaded) return;
+    
+    const script = document.createElement('script');
+    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+    script.async = true;
+    script.onload = () => {
+      window.turnstileLoaded = true;
+      renderTurnstile();
+    };
+    document.head.appendChild(script);
+  }
+  
+  // Render Turnstile widget
+  function renderTurnstile() {
+    if (!window.turnstile) return;
+    
+    window.turnstile.render('#turnstile-container', {
+      sitekey: 'TURNSTILE_SITE_KEY', // Will be replaced by Cloudflare
+      callback: (token) => {
+        chatState.turnstileToken = token;
+      }
+    });
+  }
+  
+  // Add message to chat
+  function addMessage(sender, text) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `chat-message chat-message-${sender}`;
+    messageDiv.innerHTML = `<p>${escapeHtml(text)}</p>`;
+    chatMessages.appendChild(messageDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    
+    // Store in history (max 5)
+    chatState.messages.push({ sender, text });
+    if (chatState.messages.length > 10) {
+      chatState.messages = chatState.messages.slice(-10);
+    }
+  }
+  
+  // Escape HTML
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+  
+  // Send message
+  chatForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const message = chatInput.value.trim();
+    if (!message) return;
+    
+    if (chatState.quota <= 0) {
+      showLimitReached();
+      return;
+    }
+    
+    // Add user message
+    addMessage('user', message);
+    chatInput.value = '';
+    
+    // Check Turnstile
+    if (!chatState.turnstileToken) {
+      addMessage('bot', 'Пожалуйста, подтвердите, что вы не робот.');
+      return;
+    }
+    
+    try {
+      const response = await fetch('/api/consult/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          message,
+          turnstileToken: chatState.turnstileToken,
+          location: chatState.location,
+          history: chatState.messages.slice(-5)
+        })
+      });
+      
+      const data = await response.json();
+      
+      if (response.ok) {
+        addMessage('bot', data.response);
+        chatState.quota = data.quotaRemaining;
+        chatQuotaText.textContent = `Осталось вопросов: ${chatState.quota}`;
+        
+        if (chatState.quota <= 0) {
+          showLimitReached();
+        }
+      } else if (response.status === 429) {
+        showLimitReached();
+      } else {
+        addMessage('bot', 'Извините, произошла ошибка. Пожалуйста, позвоните нам: +7 (495) 722‑36‑27');
+      }
+    } catch (error) {
+      addMessage('bot', 'Извините, произошла ошибка соединения. Пожалуйста, позвоните нам: +7 (495) 722‑36‑27');
+    }
+  });
+  
+  // Show limit reached
+  function showLimitReached() {
+    chatInputArea.hidden = true;
+    chatLimit.hidden = false;
+  }
+</script>

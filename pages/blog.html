@@ -1,0 +1,63 @@
+<!-- pages/blog.html -->
+---
+layout: page
+title: "Блог о техническом обслуживании автомобилей"
+description: "Полезные материалы о ТО, диагностике и ремонте японских и корейских автомобилей. Публикуем 3 статьи в неделю."
+permalink: /blog/
+---
+
+<p class="lead">Полезные материалы о ТО, диагностике и ремонте японских и корейских автомобилей. Публикуем 3 статьи в неделю.</p>
+
+<div class="blog-grid" style="margin-top: calc(var(--gap) * 5);">
+  {% for post in site.posts limit: 12 %}
+    <article class="blog-card">
+      {% if post.image %}
+        <div class="blog-card-image">
+          <img src="{{ post.image | relative_url }}" alt="{{ post.title | escape }}" loading="lazy">
+        </div>
+      {% endif %}
+      <div class="blog-card-content">
+        <div class="blog-card-meta">
+          {% if post.category %}
+            <span class="blog-card-category">{{ post.category }}</span>
+          {% endif %}
+          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%d.%m.%Y" }}</time>
+        </div>
+        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+        {% if post.description %}
+          <p>{{ post.description }}</p>
+        {% endif %}
+        <a href="{{ post.url | relative_url }}" class="card-link">Читать →</a>
+      </div>
+    </article>
+  {% endfor %}
+</div>
+
+{% if site.posts.size == 0 %}
+  <div style="text-align: center; padding: calc(var(--gap) * 8) 0;">
+    <p style="color: var(--muted);">Статьи скоро появятся. Следите за обновлениями!</p>
+  </div>
+{% endif %}
+
+<!-- Pagination (when needed) -->
+{% if paginator.total_pages > 1 %}
+  <nav class="pagination" aria-label="Навигация по блогу">
+    {% if paginator.previous_page %}
+      <a href="{{ paginator.previous_page_path | relative_url }}">← Назад</a>
+    {% endif %}
+    
+    {% for page in (1..paginator.total_pages) %}
+      {% if page == paginator.page %}
+        <span class="current">{{ page }}</span>
+      {% elsif page == 1 %}
+        <a href="{{ '/blog/' | relative_url }}">{{ page }}</a>
+      {% else %}
+        <a href="{{ site.paginate_path | relative_url | replace: ':num', page }}">{{ page }}</a>
+      {% endif %}
+    {% endfor %}
+    
+    {% if paginator.next_page %}
+      <a href="{{ paginator.next_page_path | relative_url }}">Вперёд →</a>
+    {% endif %}
+  </nav>
+{% endif %}

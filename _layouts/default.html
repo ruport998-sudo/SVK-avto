@@ -1,0 +1,49 @@
+<!-- _layouts/default.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  {% include seo.html %}
+  {% include schema.html %}
+  
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  
+  <!-- Self-hosted Manrope font -->
+  <style>
+    @font-face {
+      font-family: 'Manrope';
+      src: url('{{ "/assets/fonts/manrope-variable.woff2" | relative_url }}') format('woff2-variations');
+      font-weight: 200 800;
+      font-style: normal;
+      font-display: swap;
+    }
+  </style>
+  
+  <!-- Fallback for systems without variable fonts -->
+  <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="{{ "/assets/favicon.svg" | relative_url }}">
+  <link rel="apple-touch-icon" href="{{ "/assets/apple-touch-icon.png" | relative_url }}">
+  
+  <!-- Canonical -->
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
+</head>
+<body>
+  {% include header.html %}
+  
+  <main id="main-content">
+    {{ content }}
+  </main>
+  
+  {% include footer.html %}
+  {% include chat-widget.html %}
+  
+  <!-- Minimal JS -->
+  <script src="{{ "/assets/js/main.js" | relative_url }}" defer></script>
+</body>
+</html>

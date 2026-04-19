@@ -1,0 +1,69 @@
+<!-- _layouts/service.html -->
+---
+layout: default
+---
+
+<article class="service-page">
+  <header class="service-header">
+    <div class="container">
+      <nav aria-label="Breadcrumb" class="breadcrumb">
+        <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <a itemprop="item" href="/services/"><span itemprop="name">Услуги</span></a>
+            <meta itemprop="position" content="1">
+          </li>
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span itemprop="name">{{ page.title }}</span>
+            <meta itemprop="position" content="2">
+          </li>
+        </ol>
+      </nav>
+      
+      <h1>{{ page.title }} в Москве</h1>
+      <p class="service-intro">{{ page.description }}</p>
+    </div>
+  </header>
+  
+  <div class="service-content">
+    <div class="container">
+      {{ content }}
+    </div>
+  </div>
+  
+  <footer class="service-footer">
+    <div class="container">
+      <div class="service-cta">
+        <h3>Запишитесь на {{ page.title | downcase }}</h3>
+        <p>Позвоните или оставьте заявку — перезвоним в течение 30 минут.</p>
+        <div class="cta-buttons">
+          <a href="tel:+74957223627" class="btn btn-primary">Позвонить: +7 (495) 722‑36‑27</a>
+          <a href="/contacts/" class="btn btn-outline">Записаться онлайн</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</article>
+
+<!-- Service Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": {{ page.title | jsonify }},
+  "provider": {
+    "@type": "AutoRepair",
+    "name": "СВК Авто",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "ул. Поклонная, д. 11, стр. 1",
+      "addressLocality": "Москва",
+      "addressCountry": "RU"
+    }
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": "Москва"
+  },
+  "description": {{ page.description | jsonify }}
+}
+</script>

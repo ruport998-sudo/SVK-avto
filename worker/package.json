@@ -1,0 +1,19 @@
+{
+  "name": "svkauto-worker",
+  "version": "1.0.0",
+  "description": "Cloudflare Worker for СВК Авto - AI blog and chat",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "test": "vitest",
+    "lint": "eslint src/",
+    "format": "prettier --write src/"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20231218.0",
+    "typescript": "^5.3.3",
+    "wrangler": "^3.22.1"
+  },
+  "dependencies": {}
+}

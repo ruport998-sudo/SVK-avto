@@ -1,0 +1,97 @@
+<!-- _layouts/post.html -->
+---
+layout: default
+---
+
+<article class="post" itemscope itemtype="https://schema.org/BlogPosting">
+  <header class="post-header">
+    <div class="container">
+      {% if page.category %}
+        <span class="post-category">{{ page.category }}</span>
+      {% endif %}
+      
+      <h1 itemprop="headline">{{ page.title }}</h1>
+      
+      <div class="post-meta">
+        <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+          {{ page.date | date: "%d %B %Y" }}
+        </time>
+        {% if page.author %}
+          <span itemprop="author" itemscope itemtype="https://schema.org/Organization">
+            <span itemprop="name">{{ page.author }}</span>
+          </span>
+        {% endif %}
+      </div>
+      
+      {% if page.image %}
+        <figure class="post-image">
+          <img 
+            src="{{ page.image | relative_url }}" 
+            alt="{{ page.title | escape }}"
+            width="1200"
+            height="630"
+            loading="eager"
+            decoding="async"
+            itemprop="image"
+          >
+        </figure>
+      {% endif %}
+    </div>
+  </header>
+  
+  <div class="post-content" itemprop="articleBody">
+    <div class="container">
+      {{ content }}
+    </div>
+  </div>
+  
+  <footer class="post-footer">
+    <div class="container">
+      {% if page.tags %}
+        <div class="post-tags">
+          {% for tag in page.tags %}
+            <span class="tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
+      
+      <div class="post-cta">
+        <h3>Есть вопросы по вашему автомобилю?</h3>
+        <p>Запишитесь на диагностику или позвоните нам.</p>
+        <div class="cta-buttons">
+          <a href="/contacts/" class="btn btn-primary">Записаться</a>
+          <a href="tel:+74957223627" class="btn btn-outline">Позвонить</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</article>
+
+<!-- BlogPosting Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ page.title | jsonify }},
+  "description": {{ page.description | jsonify }},
+  "image": {{ page.image | absolute_url | jsonify }},
+  "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
+  "dateModified": {{ page.last_modified_at | default: page.date | date_to_xmlschema | jsonify }},
+  "author": {
+    "@type": "Organization",
+    "name": "СВК Авто"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "СВК Авто",
+    "logo": {
+      "@type": "ImageObject",
+      "url": {{ "/assets/logo.png" | absolute_url | jsonify }}
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ page.url | absolute_url | jsonify }}
+  }
+}
+</script>

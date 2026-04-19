@@ -1,0 +1,124 @@
+<!-- _includes/schema.html -->
+<!-- Organization Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "СВК Авто",
+  "alternateName": "ООО «СВК Авто Плюс»",
+  "url": "{{ site.url }}",
+  "logo": "{{ "/assets/logo.png" | absolute_url }}",
+  "email": "{{ site.email }}",
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "+7-495-722-36-27",
+      "contactType": "customer service",
+      "areaServed": "RU",
+      "availableLanguage": "Russian",
+      "hoursAvailable": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        "opens": "09:00",
+        "closes": "20:00"
+      }
+    },
+    {
+      "@type": "ContactPoint",
+      "telephone": "+7-495-722-36-15",
+      "contactType": "customer service",
+      "areaServed": "RU",
+      "availableLanguage": "Russian",
+      "hoursAvailable": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        "opens": "09:00",
+        "closes": "20:00"
+      }
+    }
+  ],
+  "department": [
+    {
+      "@type": "AutoRepair",
+      "name": "СВК Авто на Поклонной",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "ул. Поклонная, д. 11, стр. 1",
+        "addressLocality": "Москва",
+        "addressCountry": "RU"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "55.7365",
+        "longitude": "37.3785"
+      },
+      "telephone": "+7-495-722-36-27",
+      "openingHours": "Mo-Su 09:00-20:00",
+      "priceRange": "₽₽",
+      "currenciesAccepted": "RUB",
+      "paymentAccepted": "Cash, Card"
+    },
+    {
+      "@type": "AutoRepair",
+      "name": "СВК Авто на Кутузовском",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Кутузовский пр-т, д. 88",
+        "addressLocality": "Москва",
+        "addressCountry": "RU"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "55.7317",
+        "longitude": "37.3512"
+      },
+      "telephone": "+7-495-722-36-15",
+      "openingHours": "Mo-Su 09:00-20:00",
+      "priceRange": "₽₽",
+      "currenciesAccepted": "RUB",
+      "paymentAccepted": "Cash, Card"
+    }
+  ]
+}
+</script>
+
+<!-- WebSite Schema with SearchAction -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "СВК Авто",
+  "url": "{{ site.url }}",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "{{ site.url }}/search?q={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+<!-- LocalBusiness for main page -->
+{% if page.url == "/" %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AutoRepair",
+  "name": "СВК Авто",
+  "description": "Техническое обслуживание и ремонт японских и корейских автомобилей в Москве",
+  "url": "{{ site.url }}",
+  "telephone": "+7-495-722-36-27",
+  "email": "svkauto@mail.ru",
+  "openingHours": "Mo-Su 09:00-20:00",
+  "priceRange": "₽₽",
+  "currenciesAccepted": "RUB",
+  "paymentAccepted": "Cash, Card",
+  "areaServed": {
+    "@type": "City",
+    "name": "Москва"
+  }
+}
+</script>
+{% endif %}

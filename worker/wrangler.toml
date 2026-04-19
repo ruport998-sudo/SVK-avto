@@ -1,0 +1,31 @@
+# wrangler.toml
+# Cloudflare Worker configuration for СВК Авто AI Blog & Chat
+
+name = "svkauto-worker"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# D1 Database
+[[d1_databases]]
+binding = "DB"
+database_name = "svkauto-db"
+database_id = "your-database-id-here"
+
+# Environment variables (secrets should be set via `wrangler secret put`)
+[vars]
+SITE_BASE_URL = "https://svkautoplus.ru"
+GITHUB_OWNER = "your-github-username"
+GITHUB_REPO = "svkauto-website"
+GITHUB_BRANCH = "main"
+
+# Secrets (set via wrangler secret put):
+# GROQ_API_KEY
+# GITHUB_TOKEN
+# CHAT_AUTH_TOKEN
+# TURNSTILE_SECRET_KEY
+# INDEXNOW_KEY
+
+# Cron triggers for AI blog
+[triggers]
+crons = ["5 6 * * *"]

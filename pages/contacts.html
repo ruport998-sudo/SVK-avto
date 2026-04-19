@@ -1,0 +1,97 @@
+<!-- pages/contacts.html -->
+---
+layout: page
+title: "Контакты автосервиса СВК Авто"
+description: "Две станции в Москве. Ежедневно с 09:00 до 20:00. Запись по телефону или онлайн."
+permalink: /contacts/
+---
+
+<div class="company-info" style="background: var(--surface-2); padding: calc(var(--gap) * 3); border-radius: var(--r-lg); margin-bottom: calc(var(--gap) * 5);">
+  <p><strong>ООО «СВК Авто Плюс»</strong></p>
+  <p>ИНН: 7715958669 | ОГРН: 1137746292265</p>
+  <p>Email: <a href="mailto:svkauto@mail.ru">svkauto@mail.ru</a></p>
+  <p>Режим работы: <strong>ежедневно 09:00–20:00</strong></p>
+</div>
+
+<h2>Наши станции</h2>
+
+<div class="grid grid-2" style="margin-top: calc(var(--gap) * 4);">
+  <article class="location-card">
+    <h3>Станция «Поклонная»</h3>
+    <p class="location-address">Москва, ул. Поклонная, д. 11, стр. 1</p>
+    <p class="location-metro">м. Парк Победы (выход 1, далее 5 минут пешком)</p>
+    <a href="tel:+74957223627" class="location-phone">+7 (495) 722‑36‑27</a>
+    <p class="location-hours">Ежедневно 09:00–20:00</p>
+    <div class="location-actions">
+      <a href="https://yandex.ru/maps/-/CDXVnO4n" target="_blank" rel="noopener" class="btn btn-outline">Яндекс.Карты</a>
+      <a href="https://goo.gl/maps/poklonnaya-svk" target="_blank" rel="noopener" class="btn btn-outline">Google Maps</a>
+    </div>
+  </article>
+  
+  <article class="location-card">
+    <h3>Станция «Кутузовский»</h3>
+    <p class="location-address">Москва, Кутузовский пр‑т, д. 88</p>
+    <a href="tel:+74957223615" class="location-phone">+7 (495) 722‑36‑15</a>
+    <p class="location-hours">Ежедневно 09:00–20:00</p>
+    <div class="location-actions">
+      <a href="https://yandex.ru/maps/-/CDXVnQ4p" target="_blank" rel="noopener" class="btn btn-outline">Яндекс.Карты</a>
+      <a href="https://goo.gl/maps/kutuzovsky-svk" target="_blank" rel="noopener" class="btn btn-outline">Google Maps</a>
+    </div>
+  </article>
+</div>
+
+<h2 style="margin-top: calc(var(--gap) * 6);">Заказать обратный звонок</h2>
+
+<form id="callback-form" class="callback-form" style="max-width: 500px; margin-top: calc(var(--gap) * 4);">
+  <div class="form-group">
+    <label for="name">Ваше имя</label>
+    <input type="text" id="name" name="name" required placeholder="Иван">
+  </div>
+  
+  <div class="form-group">
+    <label for="phone">Телефон</label>
+    <input type="tel" id="phone" name="phone" required placeholder="+7 (___) ___-__-__">
+  </div>
+  
+  <div class="form-group">
+    <label for="time">Удобное время звонка</label>
+    <select id="time" name="time">
+      <option value="morning">Утро (09:00–12:00)</option>
+      <option value="day" selected>День (12:00–16:00)</option>
+      <option value="evening">Вечер (16:00–20:00)</option>
+    </select>
+  </div>
+  
+  <button type="submit" class="btn btn-primary btn-lg">Перезвоните мне</button>
+</form>
+
+<div id="callback-success" style="display: none; background: var(--accent-s); padding: calc(var(--gap) * 4); border-radius: var(--r-lg); margin-top: calc(var(--gap) * 4);">
+  <h3>Спасибо!</h3>
+  <p>Перезвоним вам в течение 30 минут в рабочее время (09:00–20:00).</p>
+</div>
+
+<script>
+  document.getElementById('callback-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData);
+    
+    try {
+      const response = await fetch('/api/callback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      
+      if (response.ok) {
+        this.style.display = 'none';
+        document.getElementById('callback-success').style.display = 'block';
+      } else {
+        alert('Произошла ошибка. Пожалуйста, позвоните нам напрямую.');
+      }
+    } catch (error) {
+      alert('Произошла ошибка соединения. Пожалуйста, позвоните нам напрямую.');
+    }
+  });
+</script>

@@ -1,0 +1,8 @@
+# robots.txt
+# СВК Авто - svkautoplus.ru
+
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://svkautoplus.ru/sitemap.xml
