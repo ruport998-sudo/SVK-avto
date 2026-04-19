@@ -1769,8 +1769,31 @@ textarea:focus {
 
 /* Mobile button spacing for section-cta */
 @media (max-width: 767px) {
+  .section-cta {
+    padding: 0 calc(var(--gap) * 2);
+  }
+  
   .section-cta .btn {
     width: 100%;
-    max-width: 400px;
+    max-width: 100%;
+  }
+  
+  .page-content .section-cta {
+    margin-top: calc(var(--gap) * 4);
+  }
+}
+
+
+/* Page content buttons mobile fix */
+@media (max-width: 767px) {
+  .page-content .btn {
+    width: 100%;
+    margin-top: calc(var(--gap) * 1.5);
+  }
+  
+  .page-content .card .btn,
+  .page-content .promo-card .btn,
+  .page-content .location-card .btn {
+    width: 100%;
   }
 }
