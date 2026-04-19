@@ -1559,10 +1559,12 @@ textarea:focus {
   .hero-actions {
     flex-direction: column;
     width: 100%;
+    gap: calc(var(--gap) * 1.5);
   }
   
   .hero-actions .btn {
     width: 100%;
+    min-height: 52px;
   }
   
   .trust-badges {
@@ -1578,6 +1580,11 @@ textarea:focus {
     padding: calc(var(--gap) * 3);
   }
   
+  .to-block .btn {
+    width: 100%;
+    margin-top: calc(var(--gap) * 2);
+  }
+  
   .grid-2,
   .grid-3,
   .grid-4 {
@@ -1586,6 +1593,12 @@ textarea:focus {
   
   .card {
     padding: calc(var(--gap) * 2.5);
+  }
+  
+  .card .btn,
+  .promo-card .btn {
+    width: 100%;
+    margin-top: calc(var(--gap));
   }
   
   .steps {
@@ -1604,10 +1617,12 @@ textarea:focus {
   .location-actions {
     flex-direction: column;
     width: 100%;
+    gap: calc(var(--gap) * 1.5);
   }
   
   .location-actions .btn {
     width: 100%;
+    min-height: 52px;
   }
   
   .brands {
@@ -1748,5 +1763,14 @@ textarea:focus {
   .menu-toggle[aria-expanded="true"] .menu-icon::after {
     transform: rotate(-45deg);
     top: 0;
+  }
+}
+
+
+/* Mobile button spacing for section-cta */
+@media (max-width: 767px) {
+  .section-cta .btn {
+    width: 100%;
+    max-width: 400px;
   }
 }
