@@ -1829,3 +1829,20 @@ textarea:focus {
     width: 100%;
   }
 }
+
+
+/* Hero background mobile optimization */
+@media (max-width: 767px) {
+  .hero::before {
+    background-position: center center;
+    background-size: cover;
+    opacity: 0.1;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero::before {
+    background-position: 60% center;
+    opacity: 0.08;
+  }
+}
