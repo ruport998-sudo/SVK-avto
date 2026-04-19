@@ -38,7 +38,7 @@
   --container: 1280px;
   --container-narrow: 800px;
   --gap: 8px;
-  --section-gap: clamp(40px, 8vw, 80px);
+  --section-gap: clamp(32px, 6vw, 64px);
 
   /* Radii */
   --r-sm: 8px;
