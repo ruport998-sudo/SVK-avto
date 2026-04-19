@@ -546,6 +546,7 @@ section {
 
 .to-list {
   display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: calc(var(--gap) * 1.5);
   margin-bottom: calc(var(--gap) * 4);
 }
@@ -1845,5 +1846,13 @@ textarea:focus {
   .hero::before {
     background-position: 60% center;
     opacity: 0.16;
+  }
+}
+
+
+/* TO list mobile - one column */
+@media (max-width: 767px) {
+  .to-list {
+    grid-template-columns: 1fr;
   }
 }
