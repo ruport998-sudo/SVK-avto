@@ -1856,3 +1856,9 @@ textarea:focus {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* Reduced spacing after TO section */
+.to-section ~ section {
+  padding-top: calc(var(--section-gap) * 0.7);
+}
