@@ -1698,6 +1698,7 @@ textarea:focus {
   .menu-toggle {
     display: flex !important;
     z-index: 101;
+    position: relative;
   }
   
   .menu {
