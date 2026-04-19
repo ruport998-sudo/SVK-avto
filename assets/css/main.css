@@ -480,6 +480,46 @@ section {
   font-size: var(--p-sm);
 }
 
+/* Discount cards */
+.discount-card-silver {
+  background: linear-gradient(135deg, #e8eaed 0%, #f5f6f7 100%);
+  border: 2px solid #c5c9ce;
+}
+
+.discount-card-silver h3 {
+  color: #5f6368;
+}
+
+.discount-card-silver .price {
+  color: #5f6368;
+}
+
+.discount-card-gold {
+  background: linear-gradient(135deg, #fef9e7 0%, #fffbf0 100%);
+  border: 2px solid #e6d5a8;
+}
+
+.discount-card-gold h3 {
+  color: #9d7e3a;
+}
+
+.discount-card-gold .price {
+  color: #9d7e3a;
+}
+
+.discount-card-platinum {
+  background: linear-gradient(135deg, #e8f4f8 0%, #f0f8fb 100%);
+  border: 2px solid #b8d4dd;
+}
+
+.discount-card-platinum h3 {
+  color: #4a7c8c;
+}
+
+.discount-card-platinum .price {
+  color: #4a7c8c;
+}
+
 /* ============================================
    GRIDS
    ============================================ */
