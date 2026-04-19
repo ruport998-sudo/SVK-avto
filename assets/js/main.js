@@ -14,6 +14,24 @@
       this.setAttribute('aria-expanded', !isExpanded);
       mainMenu.classList.toggle('is-open');
     });
+    
+    // Close menu on overlay click
+    document.addEventListener('click', function(e) {
+      if (mainMenu.classList.contains('is-open') && 
+          !mainMenu.contains(e.target) && 
+          !menuToggle.contains(e.target)) {
+        menuToggle.setAttribute('aria-expanded', 'false');
+        mainMenu.classList.remove('is-open');
+      }
+    });
+    
+    // Close menu on link click
+    mainMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', function() {
+        menuToggle.setAttribute('aria-expanded', 'false');
+        mainMenu.classList.remove('is-open');
+      });
+    });
   }
 
   // Smooth scroll for anchor links
