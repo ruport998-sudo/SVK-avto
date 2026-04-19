@@ -508,16 +508,16 @@ section {
 }
 
 .discount-card-platinum {
-  background: linear-gradient(135deg, #e8f4f8 0%, #f0f8fb 100%);
-  border: 2px solid #b8d4dd;
+  background: linear-gradient(135deg, #e5e8eb 0%, #f2f4f6 100%);
+  border: 2px solid #c0c6cc;
 }
 
 .discount-card-platinum h3 {
-  color: #4a7c8c;
+  color: #5a6570;
 }
 
 .discount-card-platinum .price {
-  color: #4a7c8c;
+  color: #5a6570;
 }
 
 /* ============================================
