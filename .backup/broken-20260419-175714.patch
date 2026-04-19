@@ -1,0 +1,197 @@
+diff --git a/404.md b/404.md
+index 34d4d8b..6d4c445 100644
+--- a/404.md
++++ b/404.md
+@@ -1,8 +1,9 @@
+-<!-- 404.html -->
+ ---
++
+ layout: default
+ title: "Страница не найдена"
+ description: "Запрашиваемая страница не существует."
++permalink: /404.html
+ ---
+ 
+ <div class="error-page">
+diff --git a/_includes/chat-widget.html b/_includes/chat-widget.html
+index 8d4c884..4935e93 100644
+--- a/_includes/chat-widget.html
++++ b/_includes/chat-widget.html
+@@ -109,8 +109,6 @@
+   const locationStep = document.getElementById('chat-location-step');
+   
+   // Check localStorage for closed state
+-  const chatClosedUntil = localStorage.getItem('chatClosedUntil');
+-  if (chatClosedUntil && Date.now() < parseInt(chatClosedUntil)) {
+     chatToggle.style.display = 'none';
+   }
+   
+@@ -133,7 +131,6 @@
+     
+     // Don't show for 7 days
+     const sevenDays = Date.now() + (7 * 24 * 60 * 60 * 1000);
+-    localStorage.setItem('chatClosedUntil', sevenDays.toString());
+   });
+   
+   // Location selection
+@@ -267,3 +264,21 @@
+     chatLimit.hidden = false;
+   }
+ </script>
++
++<!-- SVK_CHAT_FIX_FINAL -->
++<script>
++document.addEventListener('DOMContentLoaded', () => {
++  const toggle = document.getElementById('chat-toggle');
++  const panel  = document.getElementById('chat-panel');
++  const close  = document.getElementById('chat-close');
++  if (!toggle || !panel || !close) return;
++
++  // старт: панель закрыта, кнопка видна
++  panel.setAttribute('hidden','');
++  toggle.style.display = '';
++  toggle.removeAttribute('hidden');
++
++  toggle.addEventListener('click', () => panel.removeAttribute('hidden'));
++  close.addEventListener('click',  () => panel.setAttribute('hidden',''));
++});
++</script>
+diff --git a/_layouts/default.html b/_layouts/default.html
+index ca309b8..39373cf 100644
+--- a/_layouts/default.html
++++ b/_layouts/default.html
+@@ -40,10 +40,8 @@
+     {{ content }}
+   </main>
+   
+-  {% include footer.html %}
+-  {% include chat-widget.html %}
+-  
+-  <!-- Minimal JS -->
++  {% include footer.html %}<!-- Minimal JS -->
+   <script src="{{ "/assets/js/main.js" | relative_url }}" defer></script>
++  {% include chat-widget.html %}
+ </body>
+ </html>
+diff --git a/_layouts/page.html b/_layouts/page.html
+index f3b5212..2a7f4c2 100644
+--- a/_layouts/page.html
++++ b/_layouts/page.html
+@@ -1,4 +1,3 @@
+-<!-- _layouts/page.html -->
+ ---
+ layout: default
+ ---
+diff --git a/_layouts/post.html b/_layouts/post.html
+index 9336c99..ea8ec4c 100644
+--- a/_layouts/post.html
++++ b/_layouts/post.html
+@@ -1,4 +1,3 @@
+-<!-- _layouts/post.html -->
+ ---
+ layout: default
+ ---
+diff --git a/_layouts/service.html b/_layouts/service.html
+index bc5fec6..607ec8a 100644
+--- a/_layouts/service.html
++++ b/_layouts/service.html
+@@ -1,4 +1,3 @@
+-<!-- _layouts/service.html -->
+ ---
+ layout: default
+ ---
+diff --git a/assets/css/main.css b/assets/css/main.css
+index 125e2b6..e4f93d0 100644
+--- a/assets/css/main.css
++++ b/assets/css/main.css
+@@ -1520,3 +1520,18 @@ textarea:focus {
+     text-decoration: underline;
+   }
+ }
++
++/* Fix for chat + any hidden elements: make [hidden] actually hide */
++
++/* Chat: hide only the chat panel when it is [hidden] */
++#chat-panel[hidden]{display:none !important;}
++
++/* Chat fix: hide only the chat panel when it is [hidden] */
++#chat-panel[hidden], .chat-panel[hidden]{display:none !important;}
++
++
++/* SVK_MAIN_FOOTER_GAP_V1: gap between page content and footer */
++#main-content{padding-bottom:calc(var(--gap)*6);}
++
++/* SVK_CHAT_CSS_FINAL */
++#chat-panel[hidden]{display:none !important;}
+diff --git a/pages/blog.md b/pages/blog.md
+index 36dc299..c214ed2 100644
+--- a/pages/blog.md
++++ b/pages/blog.md
+@@ -1,4 +1,3 @@
+-<!-- pages/blog.html -->
+ ---
+ layout: page
+ title: "Блог о техническом обслуживании автомобилей"
+diff --git a/pages/contacts.md b/pages/contacts.md
+index 8de9602..073775d 100644
+--- a/pages/contacts.md
++++ b/pages/contacts.md
+@@ -1,4 +1,3 @@
+-<!-- pages/contacts.html -->
+ ---
+ layout: page
+ title: "Контакты автосервиса СВК Авто"
+diff --git a/pages/guarantee.md b/pages/guarantee.md
+index 92b2cde..ce70a1c 100644
+--- a/pages/guarantee.md
++++ b/pages/guarantee.md
+@@ -1,4 +1,3 @@
+-<!-- pages/guarantee.html -->
+ ---
+ layout: page
+ title: "Гарантия на работы и запчасти"
+diff --git a/pages/prices.md b/pages/prices.md
+index 52e3897..aeefd1d 100644
+--- a/pages/prices.md
++++ b/pages/prices.md
+@@ -1,4 +1,3 @@
+-<!-- pages/prices.html -->
+ ---
+ layout: page
+ title: "Стоимость работ автосервиса СВК Авто"
+diff --git a/pages/privacy.md b/pages/privacy.md
+index 404e5a8..61149cf 100644
+--- a/pages/privacy.md
++++ b/pages/privacy.md
+@@ -1,4 +1,3 @@
+-<!-- pages/privacy.html -->
+ ---
+ layout: page
+ title: "Политика конфиденциальности"
+diff --git a/pages/promo.md b/pages/promo.md
+index c8208f5..54e024a 100644
+--- a/pages/promo.md
++++ b/pages/promo.md
+@@ -1,4 +1,3 @@
+-<!-- pages/promo.html -->
+ ---
+ layout: page
+ title: "Акции и специальные предложения"
+diff --git a/pages/rules.md b/pages/rules.md
+index b602387..74446c4 100644
+--- a/pages/rules.md
++++ b/pages/rules.md
+@@ -1,4 +1,3 @@
+-<!-- pages/rules.html -->
+ ---
+ layout: page
+ title: "Правила оказания услуг"
+diff --git a/pages/services.md b/pages/services.md
+index 3999c4e..2d18425 100644
+--- a/pages/services.md
++++ b/pages/services.md
+@@ -1,4 +1,3 @@
+-<!-- pages/services.html -->
+ ---
+ layout: page
+ title: "Услуги автосервиса СВК Авто"
