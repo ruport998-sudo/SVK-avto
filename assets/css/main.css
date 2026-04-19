@@ -520,10 +520,10 @@ section {
    TO-5000 BLOCK
    ============================================ */
 .to-block {
-  background: linear-gradient(135deg, #E8E9EB 0%, #F2F3F5 100%);
+  background: linear-gradient(135deg, #D8DADD 0%, #E5E7EA 100%);
   border-radius: var(--r-xl);
   padding: calc(var(--gap) * 5);
-  border: 1px solid #D8DADD;
+  border: 1px solid #C8CACD;
 }
 
 .to-block h2 {
