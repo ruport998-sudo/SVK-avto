@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Background hexagon -->
+  <polygon fill="#061A3A" points="256 48 432 144 432 368 256 464 80 368 80 144"/>
+
+  <!-- Tools -->
+  <g fill="#FFFFFF" transform="translate(256 256)">
+    <!-- Wrench -->
+    <g transform="rotate(-45)">
+      <rect x="-18" y="-90" width="36" height="280" rx="16"/>
+      <polygon points="0,-150 52,-120 32,-92 12,-110 -12,-110 -32,-92 -52,-120"/>
+    </g>
+
+    <!-- Screwdriver -->
+    <g transform="rotate(45)">
+      <rect x="-26" y="50" width="52" height="120" rx="18"/>
+      <rect x="-16" y="15" width="32" height="45" rx="10"/>
+      <rect x="-8" y="-140" width="16" height="160" rx="8"/>
+      <polygon points="-12,-140 12,-140 0,-165"/>
+    </g>
+  </g>
+</svg>
