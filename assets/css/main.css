@@ -495,29 +495,29 @@ section {
 }
 
 .discount-card-gold {
-  background: linear-gradient(135deg, #fef9e7 0%, #fffbf0 100%);
-  border: 2px solid #e6d5a8;
+  background: linear-gradient(135deg, #fdf5e1 0%, #fff9ed 100%);
+  border: 2px solid #d4b574;
 }
 
 .discount-card-gold h3 {
-  color: #9d7e3a;
+  color: #8b6914;
 }
 
 .discount-card-gold .price {
-  color: #9d7e3a;
+  color: #8b6914;
 }
 
 .discount-card-platinum {
-  background: linear-gradient(135deg, #e5e8eb 0%, #f2f4f6 100%);
-  border: 2px solid #c0c6cc;
+  background: linear-gradient(135deg, #dde1e6 0%, #ebeef1 100%);
+  border: 2px solid #b0b8c0;
 }
 
 .discount-card-platinum h3 {
-  color: #5a6570;
+  color: #4a5460;
 }
 
 .discount-card-platinum .price {
-  color: #5a6570;
+  color: #4a5460;
 }
 
 /* ============================================
