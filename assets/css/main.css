@@ -1836,13 +1836,13 @@ textarea:focus {
   .hero::before {
     background-position: center center;
     background-size: cover;
-    opacity: 0.15;
+    opacity: 0.18;
   }
 }
 
 @media (max-width: 480px) {
   .hero::before {
     background-position: 60% center;
-    opacity: 0.12;
+    opacity: 0.16;
   }
 }
