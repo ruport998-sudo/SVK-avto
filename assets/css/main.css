@@ -245,9 +245,9 @@ section {
 }
 
 .logo-slogan {
-  font-size: 11px;
+  font-size: 13px;
   color: var(--muted);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.2;
 }
 
