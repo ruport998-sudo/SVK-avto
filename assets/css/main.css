@@ -695,20 +695,20 @@ section {
 /* Mobile: show more brands and redistribute */
 @media (max-width: 640px) {
   .to-floater {
-    font-size: clamp(14px, 3vw, 20px);
+    font-size: clamp(16px, 4vw, 24px);
   }
   
   /* Redistribute visible brands */
-  .to-floater.f1 { top: 8%; left: 5%; }
-  .to-floater.f2 { top: 8%; right: 5%; }
-  .to-floater.f3 { top: 25%; left: 10%; }
-  .to-floater.f4 { top: 25%; right: 10%; }
-  .to-floater.f5 { top: 42%; left: 50%; transform: translateX(-50%); }
-  .to-floater.f6 { top: 58%; left: 8%; }
-  .to-floater.f7 { top: 58%; right: 8%; }
-  .to-floater.f8 { top: 75%; left: 15%; }
-  .to-floater.f9 { top: 75%; right: 15%; }
-  .to-floater.f10 { top: 92%; left: 50%; transform: translateX(-50%); }
+  .to-floater.f1 { top: 10%; left: 8%; }
+  .to-floater.f2 { top: 10%; right: 8%; }
+  .to-floater.f3 { top: 30%; left: 5%; }
+  .to-floater.f4 { top: 30%; right: 5%; }
+  .to-floater.f5 { top: 50%; left: 50%; transform: translateX(-50%); }
+  .to-floater.f6 { top: 70%; left: 8%; }
+  .to-floater.f7 { top: 70%; right: 8%; }
+  .to-floater.f8 { top: 20%; left: 50%; transform: translateX(-50%); }
+  .to-floater.f9 { top: 40%; left: 10%; }
+  .to-floater.f10 { top: 40%; right: 10%; }
   
   /* Hide extra brands on mobile */
   .to-floater.f11,
