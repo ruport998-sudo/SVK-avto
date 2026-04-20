@@ -851,7 +851,6 @@ section {
 
 .location-actions {
   display: flex;
-  flex-wrap: wrap;
   gap: calc(var(--gap) * 2);
 }
 
@@ -1002,26 +1001,35 @@ section {
   display: flex;
   flex-wrap: wrap;
   gap: calc(var(--gap));
+  align-items: center;
 }
 
 .breadcrumb li {
   display: flex;
   align-items: center;
   gap: calc(var(--gap));
+  font-size: var(--p-sm);
 }
 
 .breadcrumb li:not(:last-child)::after {
   content: '/';
   color: var(--muted);
+  opacity: 0.5;
 }
 
 .breadcrumb a {
   color: var(--muted);
   font-size: var(--p-sm);
+  transition: color var(--tr);
 }
 
 .breadcrumb a:hover {
   color: var(--accent);
+}
+
+.breadcrumb li:last-child span {
+  color: var(--text);
+  font-weight: 500;
 }
 
 /* ============================================

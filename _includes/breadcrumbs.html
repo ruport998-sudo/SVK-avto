@@ -1,0 +1,47 @@
+{% if page.url != "/" %}
+<nav class="breadcrumb" aria-label="Навигация">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item">
+        <span itemprop="name">Главная</span>
+      </a>
+      <meta itemprop="position" content="1" />
+    </li>
+    
+    {% assign crumbs = page.url | split: '/' %}
+    {% assign crumb_path = '' %}
+    {% assign crumb_position = 2 %}
+    
+    {% for crumb in crumbs %}
+      {% if crumb != '' and crumb != 'index.html' %}
+        {% assign crumb_path = crumb_path | append: '/' | append: crumb %}
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          {% if forloop.last %}
+            <span itemprop="name">{{ page.title }}</span>
+          {% else %}
+            <a href="{{ crumb_path }}/" itemprop="item">
+              <span itemprop="name">
+                {% if crumb == 'services' %}Услуги
+                {% elsif crumb == 'locations' %}Локации
+                {% elsif crumb == 'blog' %}Блог
+                {% elsif crumb == 'prices' %}Цены
+                {% elsif crumb == 'contacts' %}Контакты
+                {% elsif crumb == 'promo' %}Акции
+                {% elsif crumb == 'guarantee' %}Гарантия
+                {% elsif crumb == 'rules' %}Правила
+                {% elsif crumb == 'privacy' %}Конфиденциальность
+                {% else %}{{ crumb | capitalize }}
+                {% endif %}
+              </span>
+            </a>
+          {% endif %}
+          <meta itemprop="position" content="{{ crumb_position }}" />
+        </li>
+        
+        {% assign crumb_position = crumb_position | plus: 1 %}
+      {% endif %}
+    {% endfor %}
+  </ol>
+</nav>
+{% endif %}

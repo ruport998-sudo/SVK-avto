@@ -5,18 +5,7 @@ layout: default
 <article class="service-page">
   <header class="service-header">
     <div class="container">
-      <nav aria-label="Breadcrumb" class="breadcrumb">
-        <ol itemscope itemtype="https://schema.org/BreadcrumbList">
-          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <a itemprop="item" href="/services/"><span itemprop="name">Услуги</span></a>
-            <meta itemprop="position" content="1">
-          </li>
-          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <span itemprop="name">{{ page.title }}</span>
-            <meta itemprop="position" content="2">
-          </li>
-        </ol>
-      </nav>
+      {% include breadcrumbs.html %}
       
       <h1>{{ page.title }} в Москве</h1>
       <p class="service-intro">{{ page.description }}</p>
