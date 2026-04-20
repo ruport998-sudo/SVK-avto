@@ -639,7 +639,7 @@ section {
   font-size: clamp(18px, 2.5vw, 32px);
   font-weight: 700;
   letter-spacing: 0.05em;
-  color: rgba(15, 20, 26, 0.06);
+  color: rgba(15, 20, 26, 0.12);
   white-space: nowrap;
   will-change: transform;
 }
@@ -664,16 +664,26 @@ section {
   66% { transform: translate3d(-20px, -25px, 0) rotate(-4deg); }
 }
 
-.to-floater.f1 { top: 8%; left: 5%; animation: float1 50s ease-in-out infinite; }
-.to-floater.f2 { top: 12%; right: 8%; animation: float2 55s ease-in-out infinite; animation-delay: -5s; }
-.to-floater.f3 { top: 35%; left: 8%; animation: float3 60s ease-in-out infinite; animation-delay: -10s; }
-.to-floater.f4 { top: 42%; right: 10%; animation: float1 52s ease-in-out infinite; animation-delay: -15s; }
-.to-floater.f5 { top: 68%; left: 6%; animation: float2 57s ease-in-out infinite; animation-delay: -20s; }
-.to-floater.f6 { top: 75%; right: 12%; animation: float3 53s ease-in-out infinite; animation-delay: -25s; }
-.to-floater.f7 { top: 22%; left: 48%; animation: float1 58s ease-in-out infinite; animation-delay: -30s; }
-.to-floater.f8 { top: 52%; left: 42%; animation: float2 54s ease-in-out infinite; animation-delay: -35s; }
-.to-floater.f9 { top: 18%; right: 28%; animation: float3 56s ease-in-out infinite; animation-delay: -40s; }
-.to-floater.f10 { top: 62%; right: 22%; animation: float1 51s ease-in-out infinite; animation-delay: -45s; }
+.to-floater.f1 { top: 8%; left: 5%; animation: float1 25s ease-in-out infinite; }
+.to-floater.f2 { top: 12%; right: 8%; animation: float2 28s ease-in-out infinite; animation-delay: -3s; }
+.to-floater.f3 { top: 35%; left: 8%; animation: float3 30s ease-in-out infinite; animation-delay: -6s; }
+.to-floater.f4 { top: 42%; right: 10%; animation: float1 26s ease-in-out infinite; animation-delay: -9s; }
+.to-floater.f5 { top: 68%; left: 6%; animation: float2 29s ease-in-out infinite; animation-delay: -12s; }
+.to-floater.f6 { top: 75%; right: 12%; animation: float3 27s ease-in-out infinite; animation-delay: -15s; }
+.to-floater.f7 { top: 22%; left: 48%; animation: float1 31s ease-in-out infinite; animation-delay: -18s; }
+.to-floater.f8 { top: 52%; left: 42%; animation: float2 28s ease-in-out infinite; animation-delay: -21s; }
+.to-floater.f9 { top: 18%; right: 28%; animation: float3 29s ease-in-out infinite; animation-delay: -24s; }
+.to-floater.f10 { top: 62%; right: 22%; animation: float1 26s ease-in-out infinite; animation-delay: -27s; }
+.to-floater.f11 { top: 28%; left: 15%; animation: float2 27s ease-in-out infinite; animation-delay: -2s; }
+.to-floater.f12 { top: 55%; right: 18%; animation: float3 30s ease-in-out infinite; animation-delay: -5s; }
+.to-floater.f13 { top: 45%; left: 25%; animation: float1 28s ease-in-out infinite; animation-delay: -8s; }
+.to-floater.f14 { top: 15%; right: 35%; animation: float2 29s ease-in-out infinite; animation-delay: -11s; }
+.to-floater.f15 { top: 72%; left: 35%; animation: float3 26s ease-in-out infinite; animation-delay: -14s; }
+.to-floater.f16 { top: 32%; right: 5%; animation: float1 31s ease-in-out infinite; animation-delay: -17s; }
+.to-floater.f17 { top: 58%; left: 55%; animation: float2 27s ease-in-out infinite; animation-delay: -20s; }
+.to-floater.f18 { top: 25%; left: 65%; animation: float3 28s ease-in-out infinite; animation-delay: -23s; }
+.to-floater.f19 { top: 65%; right: 40%; animation: float1 30s ease-in-out infinite; animation-delay: -26s; }
+.to-floater.f20 { top: 38%; right: 45%; animation: float2 29s ease-in-out infinite; animation-delay: -29s; }
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
@@ -692,7 +702,17 @@ section {
   .to-floater.f7,
   .to-floater.f8,
   .to-floater.f9,
-  .to-floater.f10 {
+  .to-floater.f10,
+  .to-floater.f11,
+  .to-floater.f12,
+  .to-floater.f13,
+  .to-floater.f14,
+  .to-floater.f15,
+  .to-floater.f16,
+  .to-floater.f17,
+  .to-floater.f18,
+  .to-floater.f19,
+  .to-floater.f20 {
     display: none;
   }
 }
