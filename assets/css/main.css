@@ -851,6 +851,7 @@ section {
 
 .location-actions {
   display: flex;
+  flex-wrap: wrap;
   gap: calc(var(--gap) * 2);
 }
 
