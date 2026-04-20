@@ -978,7 +978,7 @@ section {
    ============================================ */
 .page-header {
   background: linear-gradient(180deg, var(--surface-2) 0%, var(--bg) 100%);
-  padding: calc(var(--section-gap) * 0.5) 0;
+  padding: calc(var(--section-gap) * 0.3) 0;
 }
 
 .page-header h1 {
@@ -994,7 +994,8 @@ section {
    BREADCRUMB
    ============================================ */
 .breadcrumb {
-  margin-bottom: calc(var(--gap) * 3);
+  margin-top: calc(var(--gap) * 1);
+  margin-bottom: calc(var(--gap) * 2);
 }
 
 .breadcrumb ol {
