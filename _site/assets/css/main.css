@@ -590,9 +590,10 @@ section {
 
 .to-conditions {
   color: var(--text);
-  font-size: var(--p-sm);
+  font-size: var(--p);
   margin-bottom: calc(var(--gap) * 3);
-  opacity: 0.8;
+  opacity: 1;
+  font-weight: 500;
 }
 
 .to-list {
@@ -607,7 +608,8 @@ section {
   align-items: center;
   gap: calc(var(--gap) * 1.5);
   color: var(--text);
-  font-weight: 500;
+  font-weight: 600;
+  font-size: var(--p);
 }
 
 .to-item::before {
