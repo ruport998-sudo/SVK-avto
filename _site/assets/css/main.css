@@ -389,7 +389,7 @@ section {
 
 .hero-subtitle {
   font-size: var(--p-lg);
-  color: var(--muted);
+  color: var(--text);
   margin-bottom: calc(var(--gap) * 4);
 }
 
