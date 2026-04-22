@@ -400,6 +400,25 @@ section {
   margin-bottom: calc(var(--gap) * 5);
 }
 
+.hero-actions .btn-primary {
+  background: rgba(13, 77, 153, 0.15);
+  color: var(--text);
+  font-weight: 700;
+  font-size: var(--p-lg);
+  border: 2px solid var(--accent);
+}
+
+.hero-actions .btn-primary:hover {
+  background: var(--accent);
+  color: white;
+}
+
+.hero-actions .btn-outline {
+  font-weight: 700;
+  font-size: var(--p-lg);
+  border: 2px solid var(--line);
+}
+
 /* Trust badges */
 .trust-badges {
   display: grid;
