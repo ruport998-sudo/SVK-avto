@@ -1793,6 +1793,14 @@ textarea:focus {
   
   .trust-badge {
     padding: calc(var(--gap) * 1.5);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+  }
+  
+  .trust-badge-text {
+    font-size: var(--p);
+    font-weight: 600;
+    color: var(--text);
   }
   
   .to-block {
