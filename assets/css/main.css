@@ -560,7 +560,10 @@ section {
    TO-5000 BLOCK
    ============================================ */
 .to-block {
-  background: linear-gradient(135deg, #CDD3DB 0%, #DCE2E8 100%);
+  background-image: url('/assets/images/hero-bg.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   border-radius: var(--r-xl);
   padding: calc(var(--gap) * 5);
   border: 1px solid #BCC2CA;
@@ -568,7 +571,18 @@ section {
   overflow: hidden;
 }
 
-.to-block > :not(.to-floaters) {
+.to-block::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.85);
+  z-index: 0;
+}
+
+.to-block > * {
   position: relative;
   z-index: 1;
 }
