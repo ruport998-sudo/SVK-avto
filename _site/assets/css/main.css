@@ -2006,12 +2006,20 @@ textarea:focus {
     background-size: cover;
     opacity: 0.18;
   }
+  
+  .to-block {
+    background-position: 60% center;
+  }
 }
 
 @media (max-width: 480px) {
   .hero::before {
     background-position: 60% center;
     opacity: 0.16;
+  }
+  
+  .to-block {
+    background-position: 65% center;
   }
 }
 
