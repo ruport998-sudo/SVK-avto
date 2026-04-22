@@ -1792,15 +1792,16 @@ textarea:focus {
   }
   
   .trust-badge {
-    padding: calc(var(--gap) * 1.5);
-    background: rgba(255, 255, 255, 0.85);
+    padding: calc(var(--gap) * 1.5) !important;
+    background: rgba(255, 255, 255, 0.85) !important;
     backdrop-filter: blur(10px);
+    box-shadow: none !important;
   }
   
   .trust-badge-text {
-    font-size: var(--p);
-    font-weight: 600;
-    color: var(--text);
+    font-size: var(--p) !important;
+    font-weight: 600 !important;
+    color: var(--text) !important;
   }
   
   .to-block {
