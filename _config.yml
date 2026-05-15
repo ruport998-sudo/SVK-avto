@@ -25,7 +25,7 @@ company:
 locations:
   poklonnaya:
     name: "СВК Авто на Поклонной"
-    address: "Москва, ул. Поклонная, д. 11, стр. 1"
+    address: "Москва, ул. Поклонная, д. 11, стр. 4"
     metro: "Парк Победы"
     phone: "+7 (495) 722‑36‑27"
     lat: 55.7365
@@ -47,6 +47,7 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
+  - jekyll-paginate
 
 # Collections
 collections:

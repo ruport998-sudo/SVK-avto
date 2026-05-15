@@ -1,0 +1,30 @@
+local_backend:
+  url: http://127.0.0.1:8081/api/v1
+
+backend:
+  name: git-gateway
+
+media_folder: "assets/images/uploads"
+public_folder: "/assets/images/uploads"
+
+collections:
+  - name: settings
+    label: Настройки
+    files:
+      - name: prices
+        label: Цены (прайс)
+        file: "_data/prices.json"
+        format: json
+        fields:
+          - label: Разделы
+            name: categories
+            widget: list
+            fields:
+              - { label: Заголовок, name: title, widget: string }
+              - label: Позиции
+                name: items
+                widget: list
+                fields:
+                  - { label: Услуга, name: service, widget: string }
+                  - { label: Цена, name: price, widget: string }
+                  - { label: Примечание, name: note, widget: text, required: false }

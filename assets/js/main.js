@@ -183,5 +183,4 @@
     el.textContent = new Date().getFullYear();
   });
 
-  console.log('СВК Авто - сайт загружен');
 })();

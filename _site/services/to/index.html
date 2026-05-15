@@ -18,8 +18,8 @@
 <!-- Open Graph -->
 <meta property="og:title" content="Техническое обслуживание | СВК Авто">
 <meta property="og:description" content="Плановое ТО по регламенту производителя. Используем оригинальные или рекомендованные аналоги расходных материалов.">
-<meta property="og:image" content="https://svkautoplus.ru/assets/og-default.jpg">
-<meta property="og:url" content="https://svkautoplus.ru/services/to/">
+<meta property="og:image" content="http://0.0.0.0:4000/assets/og-default.jpg">
+<meta property="og:url" content="http://0.0.0.0:4000/services/to/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:site_name" content="СВК Авто">
@@ -28,7 +28,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Техническое обслуживание | СВК Авто">
 <meta name="twitter:description" content="Плановое ТО по регламенту производителя. Используем оригинальные или рекомендованные аналоги расходных материалов.">
-<meta name="twitter:image" content="https://svkautoplus.ru/assets/og-default.jpg">
+<meta name="twitter:image" content="http://0.0.0.0:4000/assets/og-default.jpg">
 
 <!-- Additional meta -->
 <meta name="robots" content="index, follow">
@@ -47,8 +47,8 @@
   "@type": "Organization",
   "name": "СВК Авто",
   "alternateName": "ООО «СВК Авто Плюс»",
-  "url": "https://svkautoplus.ru",
-  "logo": "https://svkautoplus.ru/assets/logo.png",
+  "url": "http://0.0.0.0:4000",
+  "logo": "http://0.0.0.0:4000/assets/logo.png",
   "email": "svkauto@mail.ru",
   "contactPoint": [
     {
@@ -71,7 +71,8 @@
       "name": "СВК Авто на Поклонной",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "ул. Поклонная, д. 11, стр. 1",
+        "streetAddress": "ул. Поклонная, д. 11, стр. 4",
+
         "addressLocality": "Москва",
         "addressCountry": "RU"
       },
@@ -96,12 +97,12 @@
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "СВК Авто",
-  "url": "https://svkautoplus.ru",
+  "url": "http://0.0.0.0:4000",
   "potentialAction": {
     "@type": "SearchAction",
     "target": {
       "@type": "EntryPoint",
-      "urlTemplate": "https://svkautoplus.ru/search?q={search_term_string}"
+      "urlTemplate": "http://0.0.0.0:4000/search?q={search_term_string}"
     },
     "query-input": "required name=search_term_string"
   }
@@ -128,7 +129,7 @@
   <link rel="shortcut icon" href="/favicon.ico">
   
   <!-- Canonical -->
-  <link rel="canonical" href="https://svkautoplus.ru/services/to/">
+  <link rel="canonical" href="http://0.0.0.0:4000/services/to/">
 </head>
 <body>
   <header class="site-header" role="banner">
@@ -270,31 +271,6 @@
   <li>Мойка — в подарок</li>
 </ol>
 
-<h2 id="стоимость">Стоимость</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>Услуга</th>
-      <th>Цена</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>ТО (до 4,5 л масла)</td>
-      <td><strong>5 000 ₽</strong> (масло и фильтр включены)</td>
-    </tr>
-    <tr>
-      <td>ТО (более 4,5 л масла)</td>
-      <td><strong>7 000 ₽</strong> (масло и фильтр включены)</td>
-    </tr>
-    <tr>
-      <td>Замена масла без расходников</td>
-      <td><strong>680 ₽</strong></td>
-    </tr>
-  </tbody>
-</table>
-
 <p>Срок выполнения: до 2 дней (обычно в день обращения).</p>
 
 <p><strong>Важно:</strong> Точная стоимость определяется после осмотра и диагностики и согласуется с вами до начала работ.</p>
@@ -317,8 +293,17 @@
 
 <p>Используем материалы, соответствующие допускам производителя. Рекомендуем уточнить требования вашего дилера до ТО.</p>
 
+      
+      <!-- Dynamic prices loaded from API -->
+      <div data-service-prices data-category="to">
+        <div class="prices-loading">
+          <div class="spinner"></div>
+          <span>Загрузка цен...</span>
+        </div>
+      </div>
     </div>
   </div>
+
   
   <footer class="service-footer">
     <div class="container">
@@ -345,7 +330,8 @@
     "name": "СВК Авто",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "ул. Поклонная, д. 11, стр. 1",
+      "streetAddress": "ул. Поклонная, д. 11, стр. 4",
+
       "addressLocality": "Москва",
       "addressCountry": "RU"
     }
@@ -404,7 +390,8 @@
         
         <div class="location">
           <p class="location-name">Станция «Поклонная»</p>
-          <p class="location-address">Москва, ул. Поклонная, д. 11, стр. 1</p>
+          <p class="location-address">Москва, ул. Поклонная, д. 11, стр. 4</p>
+
           <p class="location-metro">м. Парк Победы</p>
           <a href="tel:+74957223627" class="location-phone">+7 (495) 722‑36‑27</a>
         </div>
@@ -705,6 +692,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   <!-- Minimal JS -->
   <script src="/assets/js/main.js" defer></script>
+  <script src="/assets/js/prices.js" defer></script>
   <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
     (function(m,e,t,r,i,k,a){

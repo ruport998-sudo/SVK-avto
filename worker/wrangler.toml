@@ -15,11 +15,13 @@ database_id = "your-database-id-here"
 # Environment variables (secrets should be set via `wrangler secret put`)
 [vars]
 SITE_BASE_URL = "https://svkautoplus.ru"
-GITHUB_OWNER = "your-github-username"
-GITHUB_REPO = "svkauto-website"
+ADMIN_USERNAME = "admin"
+GITHUB_OWNER = "ruport998-sudo"
+GITHUB_REPO = "SVK-avto"
 GITHUB_BRANCH = "main"
 
 # Secrets (set via wrangler secret put):
+# ADMIN_PASSWORD
 # GROQ_API_KEY
 # GITHUB_TOKEN
 # CHAT_AUTH_TOKEN

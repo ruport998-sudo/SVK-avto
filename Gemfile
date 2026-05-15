@@ -9,3 +9,8 @@ gem "webrick"
 gem "jekyll-feed"
 gem "jekyll-sitemap"
 gem "jekyll-seo-tag"
+gem "jekyll-paginate"
+
+# Windows timezone support
+gem "tzinfo"
+gem "tzinfo-data", platforms: [:windows]

@@ -65,8 +65,20 @@ CREATE TABLE IF NOT EXISTS published_posts (
   FOREIGN KEY (topic_id) REFERENCES topics(topic_id)
 );
 
+-- Prices table for admin price management
+CREATE TABLE IF NOT EXISTS prices (
+  id TEXT PRIMARY KEY,
+  service TEXT NOT NULL,
+  price TEXT NOT NULL,
+  note TEXT DEFAULT '',
+  category TEXT DEFAULT 'main',
+  sort_order INTEGER DEFAULT 0,
+  updated_at TEXT DEFAULT (datetime('now'))
+);
+
 -- Indexes for performance
 CREATE INDEX IF NOT EXISTS idx_slots_status ON calendar_slots(status);
 CREATE INDEX IF NOT EXISTS idx_slots_date ON calendar_slots(pub_date);
 CREATE INDEX IF NOT EXISTS idx_topics_category ON topics(category);
 CREATE INDEX IF NOT EXISTS idx_topics_system ON topics(system);
+CREATE INDEX IF NOT EXISTS idx_prices_category ON prices(category);

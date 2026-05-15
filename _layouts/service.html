@@ -15,8 +15,17 @@ layout: default
   <div class="service-content">
     <div class="container">
       {{ content }}
+      
+      <!-- Dynamic prices loaded from API -->
+      <div data-service-prices data-category="{{ page.name }}">
+        <div class="prices-loading">
+          <div class="spinner"></div>
+          <span>Загрузка цен...</span>
+        </div>
+      </div>
     </div>
   </div>
+
   
   <footer class="service-footer">
     <div class="container">
@@ -43,7 +52,8 @@ layout: default
     "name": "СВК Авто",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "ул. Поклонная, д. 11, стр. 1",
+      "streetAddress": "ул. Поклонная, д. 11, стр. 4",
+
       "addressLocality": "Москва",
       "addressCountry": "RU"
     }
