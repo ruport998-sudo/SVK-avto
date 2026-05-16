@@ -12,8 +12,16 @@
 
 {% if page.image %}
   {% assign og_image = page.image | absolute_url %}
+  {% assign og_image_w = 1200 %}
+  {% assign og_image_h = 900 %}
+{% elsif page.thumb %}
+  {% assign og_image = page.thumb | absolute_url %}
+  {% assign og_image_w = 400 %}
+  {% assign og_image_h = 300 %}
 {% else %}
-  {% assign og_image = "/apple-touch-icon.png" | absolute_url %}
+  {% assign og_image = "/assets/images/blog/full/СТО СВК-авто вход.webp" | absolute_url %}
+  {% assign og_image_w = 1200 %}
+  {% assign og_image_h = 900 %}
 {% endif %}
 
 <title>{{ page_title }}</title>
@@ -21,14 +29,20 @@
 <link rel="canonical" href="{{ page.url | absolute_url }}">
 <meta name="keywords" content="{{ page.keywords | default: 'автосервис, ТО, ремонт автомобилей, диагностика, Москва' }}">
 
-<!-- Open Graph -->
+<!-- Open Graph (Telegram, WhatsApp, VK, Facebook, LinkedIn) -->
 <meta property="og:title" content="{{ page_title }}">
 <meta property="og:description" content="{{ page_description }}">
 <meta property="og:image" content="{{ og_image }}">
+<meta property="og:image:width" content="{{ og_image_w }}">
+<meta property="og:image:height" content="{{ og_image_h }}">
+<meta property="og:image:type" content="image/webp">
 <meta property="og:url" content="{{ page.url | absolute_url }}">
 <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:site_name" content="{{ site.title }}">
+
+<!-- VK specific -->
+<meta property="vk:image" content="{{ og_image }}">
 
 <!-- Twitter Cards -->
 <meta name="twitter:card" content="summary_large_image">
