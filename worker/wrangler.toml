@@ -10,11 +10,11 @@ compatibility_flags = ["nodejs_compat"]
 [[d1_databases]]
 binding = "DB"
 database_name = "svkauto-db"
-database_id = "your-database-id-here"
+database_id = "3a1458a2-20f4-4126-9f03-8a9714235d54"
 
 # Environment variables (secrets should be set via `wrangler secret put`)
 [vars]
-SITE_BASE_URL = "https://svkautoplus.ru"
+SITE_BASE_URL = "https://svk-avto.ru"
 ADMIN_USERNAME = "admin"
 GITHUB_OWNER = "ruport998-sudo"
 GITHUB_REPO = "SVK-avto"

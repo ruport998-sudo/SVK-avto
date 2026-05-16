@@ -16,7 +16,7 @@ export async function handleCallback(
 ): Promise<Response> {
   // Check origin
   const origin = request.headers.get('Origin');
-  if (origin !== 'https://svkautoplus.ru') {
+  if (origin !== 'https://svk-avto.ru') {
     return jsonResponse({ error: 'Forbidden' }, 403, corsHeaders);
   }
 

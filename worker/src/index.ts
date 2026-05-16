@@ -30,7 +30,7 @@ export default {
 
     // CORS headers
     const corsHeaders = {
-      'Access-Control-Allow-Origin': 'https://svkautoplus.ru',
+      'Access-Control-Allow-Origin': 'https://svk-avto.ru',
       'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type, Authorization',
     };

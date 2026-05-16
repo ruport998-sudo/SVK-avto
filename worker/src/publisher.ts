@@ -462,7 +462,7 @@ async function notifyIndexNow(slug: string, env: Env): Promise<void> {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        host: 'svkautoplus.ru',
+        host: 'svk-avto.ru',
         key: env.INDEXNOW_KEY,
         urlList: [url, `${env.SITE_BASE_URL}/sitemap.xml`],
       }),
