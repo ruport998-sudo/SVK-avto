@@ -470,8 +470,10 @@ section {
 }
 
 .card-icon {
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
+  font-size: 36px;
+  line-height: 56px;
   color: var(--accent);
   margin-bottom: calc(var(--gap) * 2);
 }
