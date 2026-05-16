@@ -14,8 +14,6 @@ layout: default
   
   <div class="service-content">
     <div class="container">
-      {{ content }}
-      
       <!-- Dynamic prices loaded from API -->
       <div data-service-prices data-category="{{ page.name }}">
         <div class="prices-loading">
@@ -23,6 +21,8 @@ layout: default
           <span>Загрузка цен...</span>
         </div>
       </div>
+
+      {{ content }}
     </div>
   </div>
 
