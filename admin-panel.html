@@ -99,10 +99,20 @@
     }
     .unsaved-indicator.show { display: inline; }
     @media (max-width: 768px) {
-      table { font-size: 13px; }
-      th, td { padding: 8px 10px; }
+      body { padding: 8px; }
+      h1 { font-size: 18px; }
+      .subtitle { font-size: 13px; margin-bottom: 16px; }
       .toolbar { flex-direction: column; align-items: stretch; }
-      .toolbar button { width: 100%; }
+      .toolbar button { width: 100%; padding: 12px 16px; font-size: 15px; }
+      table, thead, tbody, th, td, tr { display: block; }
+      thead { display: none; }
+      tr { background: #fff; margin-bottom: 12px; border-radius: 10px; box-shadow: 0 1px 6px rgba(0,0,0,0.06); padding: 12px; }
+      tr[style*="background"] { background: #f8f9fa !important; padding: 10px 12px; font-size: 15px; }
+      td { padding: 4px 0; border: none; display: flex; flex-direction: column; gap: 2px; }
+      td::before { content: attr(data-label); font-size: 10px; color: #999; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+      td input, td textarea { font-size: 16px; padding: 10px 12px; }
+      td textarea { min-height: 48px; }
+      .category-badge { font-size: 12px; }
     }
   </style>
 </head>
@@ -321,9 +331,9 @@
         
         categories[cat].forEach(item => {
           html += '<tr data-id="' + item.id + '">';
-          html += '<td><input type="text" value="' + escapeHtml(item.service) + '" onchange="updateField(\'' + item.id + '\',\'service\',this.value)"></td>';
-          html += '<td><input type="text" value="' + escapeHtml(item.price) + '" onchange="updateField(\'' + item.id + '\',\'price\',this.value)"></td>';
-          html += '<td><textarea rows="1" onchange="updateField(\'' + item.id + '\',\'note\',this.value)">' + escapeHtml(item.note || '') + '</textarea></td>';
+          html += '<td data-label="Услуга"><input type="text" value="' + escapeHtml(item.service) + '" onchange="updateField(\'' + item.id + '\',\'service\',this.value)"></td>';
+          html += '<td data-label="Цена"><input type="text" value="' + escapeHtml(item.price) + '" onchange="updateField(\'' + item.id + '\',\'price\',this.value)"></td>';
+          html += '<td data-label="Примечание"><textarea rows="1" onchange="updateField(\'' + item.id + '\',\'note\',this.value)">' + escapeHtml(item.note || '') + '</textarea></td>';
           html += '</tr>';
         });
       });
