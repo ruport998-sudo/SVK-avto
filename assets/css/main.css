@@ -477,6 +477,11 @@ section {
   color: var(--accent);
   margin-bottom: calc(var(--gap) * 2);
 }
+.card-icon svg {
+  width: 36px;
+  height: 36px;
+  color: var(--accent);
+}
 
 .card h3 {
   margin-bottom: calc(var(--gap) * 1.5);
