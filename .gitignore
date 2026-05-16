@@ -5,3 +5,4 @@ vendor/
 *.patch
 .bundle/
 node_modules/
+SVK-avto-foto/
