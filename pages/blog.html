@@ -10,9 +10,10 @@ permalink: /blog/
 <div class="blog-grid" style="margin-top: calc(var(--gap) * 5);">
   {% for post in site.posts limit: 12 %}
     <article class="blog-card">
-      {% if post.image %}
+      {% assign card_image = post.thumb | default: post.image %}
+      {% if card_image %}
         <div class="blog-card-image">
-          <img src="{{ post.image | relative_url }}" alt="{{ post.title | escape }}" loading="lazy">
+          <img src="{{ card_image | relative_url }}" alt="{{ post.title | escape }}" loading="lazy" width="400" height="300">
         </div>
       {% endif %}
       <div class="blog-card-content">
