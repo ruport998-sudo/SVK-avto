@@ -4,3 +4,4 @@ vendor/
 .backup/
 *.patch
 .bundle/
+node_modules/
