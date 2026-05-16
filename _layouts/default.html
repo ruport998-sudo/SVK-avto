@@ -35,6 +35,18 @@
   <!-- Dublin Core for content freshness -->
   <meta name="DC.date" content="{{ page.date | default: site.time | date_to_xmlschema }}">
   <meta name="DC.language" content="ru">
+
+  <!-- Yandex-specific SEO tags -->
+  <meta name="yandex" content="noyaca">
+  <meta property="ya:interaction" content="CONTACT_FORM">
+  <meta name="apple-mobile-web-app-title" content="СВК Авто">
+
+  <!-- Yandex.Tableau widget -->
+  <link rel="yandex-tableau-widget" href="{{ "/site.webmanifest" | relative_url }}">
+
+  <!-- Commercial signals for Yandex ranking -->
+  <meta name="format-detection" content="telephone=yes">
+  <meta name="format-detection" content="address=yes">
 </head>
 <body>
   {% include header.html %}
