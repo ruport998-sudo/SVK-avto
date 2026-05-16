@@ -76,6 +76,9 @@ defaults:
     values:
       layout: "page"
 
+# Show future posts (scheduled articles)
+future: true
+
 # Exclude from processing
 exclude:
   - Gemfile
