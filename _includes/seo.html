@@ -13,12 +13,13 @@
 {% if page.image %}
   {% assign og_image = page.image | absolute_url %}
 {% else %}
-  {% assign og_image = "/assets/og-default.jpg" | absolute_url %}
+  {% assign og_image = "/apple-touch-icon.png" | absolute_url %}
 {% endif %}
 
 <title>{{ page_title }}</title>
 <meta name="description" content="{{ page_description }}">
-<meta name="keywords" content="{{ page.keywords | default: 'автосервис, ТО, ремонт автомобилей, диагностика, Москва, Hyundai, Kia, Toyota, Lexus' }}">
+<link rel="canonical" href="{{ page.url | absolute_url }}">
+<meta name="keywords" content="{{ page.keywords | default: 'автосервис, ТО, ремонт автомобилей, диагностика, Москва' }}">
 
 <!-- Open Graph -->
 <meta property="og:title" content="{{ page_title }}">

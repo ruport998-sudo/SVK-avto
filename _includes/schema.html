@@ -49,21 +49,13 @@
 }
 </script>
 
-<!-- WebSite Schema with SearchAction -->
+<!-- WebSite Schema -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "СВК Авто",
-  "url": "{{ site.url }}",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": {
-      "@type": "EntryPoint",
-      "urlTemplate": "{{ site.url }}/search?q={search_term_string}"
-    },
-    "query-input": "required name=search_term_string"
-  }
+  "url": "{{ site.url }}"
 }
 </script>
 
@@ -79,6 +71,17 @@
   "telephone": "+7-495-722-36-27",
   "email": "svkauto@mail.ru",
   "openingHours": "Mo-Su 09:00-20:00",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "ул. Поклонная, д. 11, стр. 4",
+    "addressLocality": "Москва",
+    "addressCountry": "RU"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "55.7365",
+    "longitude": "37.3785"
+  },
   "priceRange": "₽₽",
   "currenciesAccepted": "RUB",
   "paymentAccepted": "Cash, Card",
