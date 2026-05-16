@@ -25,6 +25,16 @@
   
   <!-- Canonical -->
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
+
+  <!-- Geo tags for regional SEO -->
+  <meta name="geo.region" content="RU-MOW">
+  <meta name="geo.placename" content="Москва">
+  <meta name="geo.position" content="55.7365;37.3785">
+  <meta name="ICBM" content="55.7365, 37.3785">
+
+  <!-- Dublin Core for content freshness -->
+  <meta name="DC.date" content="{{ page.date | default: site.time | date_to_xmlschema }}">
+  <meta name="DC.language" content="ru">
 </head>
 <body>
   {% include header.html %}

@@ -68,6 +68,36 @@ layout: default
   </footer>
 </article>
 
+<!-- FAQPage Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": {{ page.title | append: " — что нужно знать?" | jsonify }},
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": {{ page.description | jsonify }}
+    }
+  },{
+    "@type": "Question",
+    "name": "Сколько стоит диагностика автомобиля в Москве?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Компьютерная диагностика двигателя — 1 500 ₽, комплексная диагностика ходовой части — 1 500 ₽. Полная диагностика всех систем — от 2 500 ₽. Точная стоимость зависит от марки и модели автомобиля."
+    }
+  },{
+    "@type": "Question",
+    "name": "Как записаться в автосервис СВК Авто?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Позвоните по телефону +7 (495) 722-36-27 или оставьте заявку на сайте. Сервис работает ежедневно с 09:00 до 20:00. Предварительная запись экономит время — вы приезжаете к назначенному часу."
+    }
+  }]
+}
+</script>
+
 <!-- BlogPosting Schema -->
 <script type="application/ld+json">
 {

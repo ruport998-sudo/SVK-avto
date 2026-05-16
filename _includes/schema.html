@@ -8,6 +8,10 @@
   "url": "{{ site.url }}",
   "logo": "{{ "/assets/logo.png" | absolute_url }}",
   "email": "{{ site.email }}",
+  "sameAs": [
+    "https://yandex.ru/maps/org/svk_avto/",
+    "https://www.google.com/maps/search/СВК+Авто+Поклонная+11/@55.7365,37.3785"
+  ],
   "contactPoint": [
     {
       "@type": "ContactPoint",
@@ -30,8 +34,9 @@
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "ул. Поклонная, д. 11, стр. 4",
-
         "addressLocality": "Москва",
+        "addressRegion": "Москва",
+        "postalCode": "121170",
         "addressCountry": "RU"
       },
       "geo": {
@@ -41,7 +46,7 @@
       },
       "telephone": "+7-495-722-36-27",
       "openingHours": "Mo-Su 09:00-20:00",
-      "priceRange": "₽₽",
+      "priceRange": "от 300₽",
       "currenciesAccepted": "RUB",
       "paymentAccepted": "Cash, Card"
     }
@@ -85,10 +90,26 @@
   "priceRange": "₽₽",
   "currenciesAccepted": "RUB",
   "paymentAccepted": "Cash, Card",
-  "areaServed": {
-    "@type": "City",
-    "name": "Москва"
-  }
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Услуги автосервиса",
+    "itemListElement": [
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Техническое обслуживание", "description": "Плановое ТО от 5000₽"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Диагностика", "description": "Компьютерная и ходовая диагностика"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Ремонт двигателя", "description": "Текущий и капитальный ремонт"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Ремонт АКПП и МКПП", "description": "Обслуживание и ремонт трансмиссии"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Ремонт ходовой части", "description": "Диагностика и ремонт подвески"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Ремонт тормозной системы", "description": "Замена колодок, дисков, суппортов"}}
+    ]
+  },
+  "areaServed": [
+    {"@type": "City", "name": "Москва"},
+    {"@type": "Place", "name": "Западный округ Москвы"},
+    {"@type": "Place", "name": "Дорогомилово"},
+    {"@type": "Place", "name": "Фили"},
+    {"@type": "Place", "name": "Раменки"},
+    {"@type": "Place", "name": "Очаково-Матвеевское"}
+  ]
 }
 </script>
 {% endif %}

@@ -47,21 +47,46 @@ layout: default
   "@context": "https://schema.org",
   "@type": "Service",
   "name": {{ page.title | jsonify }},
+  "description": {{ page.description | jsonify }},
   "provider": {
     "@type": "AutoRepair",
     "name": "СВК Авто",
+    "url": "{{ site.url }}",
+    "telephone": "+7-495-722-36-27",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "ул. Поклонная, д. 11, стр. 4",
-
       "addressLocality": "Москва",
       "addressCountry": "RU"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "55.7365",
+      "longitude": "37.3785"
     }
   },
   "areaServed": {
     "@type": "City",
-    "name": "Москва"
+    "name": "Москва",
+    "containedInPlace": {
+      "@type": "AdministrativeArea",
+      "name": "Московская область"
+    }
   },
-  "description": {{ page.description | jsonify }}
+  "serviceType": "{{ page.title }}",
+  "offers": {
+    "@type": "Offer",
+    "availability": "https://schema.org/InStock",
+    "areaServed": {
+      "@type": "GeoCircle",
+      "geoMidpoint": {
+        "@type": "GeoCoordinates",
+        "latitude": "55.7365",
+        "longitude": "37.3785"
+      },
+      "geoRadius": "30000"
+    }
+  },
+  "termsOfService": "Точная стоимость определяется после осмотра и согласовывается с клиентом до начала работ."
 }
 </script>
