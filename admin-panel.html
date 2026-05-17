@@ -161,6 +161,7 @@
       <div class="tabs">
         <button class="tab-btn active" onclick="switchTab('prices')">💰 Цены</button>
         <button class="tab-btn" onclick="switchTab('promos')">🎁 Акции</button>
+        <button class="tab-btn" onclick="switchTab('toblock')">🔧 ТО Блок</button>
       </div>
 
       <!-- Prices Tab -->
@@ -193,6 +194,22 @@
           </div>
         </div>
         <div id="promosContainer">
+          <div style="text-align:center;padding:40px;color:#999;">Загрузка...</div>
+        </div>
+      </div>
+
+      <!-- TO Block Tab -->
+      <div class="tab-content" id="toblockTab">
+        <div class="toolbar">
+          <div>
+            <button class="btn-save" onclick="saveTOBlock()">💾 Сохранить ТО блок</button>
+          </div>
+          <div>
+            <button class="btn-reset" onclick="loadTOBlock()">↻ Сбросить</button>
+            <button class="btn-logout" onclick="logout()">🚪 Выйти</button>
+          </div>
+        </div>
+        <div id="toblockContainer">
           <div style="text-align:center;padding:40px;color:#999;">Загрузка...</div>
         </div>
       </div>
@@ -478,7 +495,8 @@
       document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
       event.target.classList.add('active');
       if (tab === 'prices') { document.getElementById('pricesTab').classList.add('active'); }
-      else { document.getElementById('promosTab').classList.add('active'); loadPromos(); }
+      else if (tab === 'promos') { document.getElementById('promosTab').classList.add('active'); loadPromos(); }
+      else { document.getElementById('toblockTab').classList.add('active'); loadTOBlock(); }
     }
 
     function loadPromos() {
@@ -548,6 +566,55 @@
           setTimeout(() => { status.className = 'save-status'; }, 3000);
         }, 300);
       } catch (err) {
+        overlay.classList.remove('show');
+        status.className = 'save-status error';
+        status.textContent = '❌ Ошибка: ' + err.message;
+      }
+    }
+
+    // ---- TO BLOCK ----
+    const DEFAULT_TO_BLOCK = {
+      title: "Плановое ТО за 5 000 ₽",
+      price: "5 000 ₽",
+      conditions: "Масло и фильтр включены. Мойка — в подарок.<br>Стоимость действует для бензиновых двигателей с заправочным объёмом масла до 4,5 л. Для двигателей с объёмом масла более 4,5 л — 7 000 ₽.",
+      btnText: "Записаться на ТО"
+    };
+    let toBlockData = {};
+
+    function loadTOBlock() {
+      var c = document.getElementById('toblockContainer');
+      c.innerHTML = '<div style="text-align:center;padding:40px;color:#999;">Загрузка...</div>';
+      var saved = localStorage.getItem('svk_to_block_data');
+      if (saved) { try { toBlockData = JSON.parse(saved); } catch(e) { toBlockData = Object.assign({}, DEFAULT_TO_BLOCK); } }
+      else { toBlockData = Object.assign({}, DEFAULT_TO_BLOCK); }
+      renderTOBlock();
+    }
+
+    function renderTOBlock() {
+      var c = document.getElementById('toblockContainer');
+      c.innerHTML = '<div class="promo-card-edit">' +
+        '<div class="field"><label>Заголовок H2</label><input type="text" id="toBlockTitle" value="' + escapeHtml(toBlockData.title) + '" onchange="toBlockData.title=this.value"></div>' +
+        '<div class="field"><label>Цена (крупная)</label><input type="text" id="toBlockPrice" value="' + escapeHtml(toBlockData.price) + '" onchange="toBlockData.price=this.value"></div>' +
+        '<div class="field"><label>Условия (можно HTML br)</label><textarea rows="3" id="toBlockCond" onchange="toBlockData.conditions=this.value">' + escapeHtml(toBlockData.conditions) + '</textarea></div>' +
+        '<div class="field"><label>Текст кнопки</label><input type="text" id="toBlockBtn" value="' + escapeHtml(toBlockData.btnText) + '" onchange="toBlockData.btnText=this.value"></div>' +
+        '</div>';
+    }
+
+    function saveTOBlock() {
+      var overlay = document.getElementById('loadingOverlay');
+      var status = document.getElementById('saveStatus');
+      overlay.classList.add('show');
+      status.className = 'save-status loading';
+      status.textContent = 'Сохранение...';
+      try {
+        localStorage.setItem('svk_to_block_data', JSON.stringify(toBlockData));
+        setTimeout(function(){
+          overlay.classList.remove('show');
+          status.className = 'save-status success';
+          status.textContent = '✅ ТО блок сохранён!';
+          setTimeout(function(){ status.className = 'save-status'; }, 3000);
+        }, 300);
+      } catch(err) {
         overlay.classList.remove('show');
         status.className = 'save-status error';
         status.textContent = '❌ Ошибка: ' + err.message;

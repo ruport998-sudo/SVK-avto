@@ -352,3 +352,19 @@ description: "Автосервис на Поклонной в Москве. Еж
   });
 })();
 </script>
+
+<script>
+(function(){
+  var saved = localStorage.getItem('svk_to_block_data');
+  if (!saved) return;
+  try { var data = JSON.parse(saved); } catch(e) { return; }
+  var h2 = document.querySelector('.to-block h2');
+  var price = document.querySelector('.to-price');
+  var cond = document.querySelector('.to-conditions');
+  var btn = document.querySelector('.to-block .btn');
+  if (h2 && data.title) h2.textContent = data.title;
+  if (price && data.price) price.textContent = data.price;
+  if (cond && data.conditions) cond.innerHTML = data.conditions;
+  if (btn && data.btnText) btn.textContent = data.btnText;
+})();
+</script>
