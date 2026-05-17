@@ -114,6 +114,30 @@
       td textarea { min-height: 48px; }
       .category-badge { font-size: 12px; }
     }
+    /* Tabs */
+    .tabs { display: flex; gap: 4px; margin-bottom: 24px; border-bottom: 2px solid #e0e0e0; }
+    .tab-btn { padding: 10px 24px; border: none; background: none; font-size: 15px; font-weight: 500; cursor: pointer; color: #666; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.2s; }
+    .tab-btn.active { color: #0d4d99; border-bottom-color: #0d4d99; }
+    .tab-btn:hover { color: #0d4d99; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    /* Promo cards editing */
+    .promo-card-edit { background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .promo-card-edit .field { margin-bottom: 12px; }
+    .promo-card-edit label { display: block; font-size: 11px; color: #999; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; margin-bottom: 4px; }
+    .promo-card-edit input, .promo-card-edit textarea { width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; }
+    .promo-card-edit textarea { resize: vertical; min-height: 60px; }
+    .promo-card-edit .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .promo-card-edit .badge-select { width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; background: #fff; }
+    .btn-delete-promo { background: #d32f2f; color: #fff; border: none; border-radius: 6px; padding: 6px 14px; font-size: 13px; cursor: pointer; }
+    .btn-delete-promo:hover { background: #b71c1c; }
+    .promo-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .promo-card-header h4 { font-size: 15px; margin: 0; }
+    @media (max-width: 768px) {
+      .promo-card-edit .field-row { grid-template-columns: 1fr; }
+      .tabs { overflow-x: auto; }
+      .tab-btn { padding: 8px 16px; font-size: 13px; white-space: nowrap; }
+    }
   </style>
 </head>
 <body>
@@ -129,24 +153,48 @@
 
     <!-- Admin Panel -->
     <div class="admin-panel" id="adminPanel">
-      <h1>Админ-панель — Управление ценами (локальная версия)</h1>
-      <p class="subtitle">Редактируйте цены на услуги. Данные хранятся в localStorage браузера.</p>
+      <h1>Админ-панель — Управление сайтом</h1>
+      <p class="subtitle">Редактируйте цены и акции. Данные хранятся в localStorage браузера.</p>
 
       <div class="save-status" id="saveStatus"></div>
 
-      <div class="toolbar">
-        <div>
-          <button class="btn-save" id="saveBtn" onclick="savePrices()">💾 Сохранить все изменения</button>
-          <span class="unsaved-indicator" id="unsavedIndicator">✏️ Есть несохранённые изменения</span>
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('prices')">💰 Цены</button>
+        <button class="tab-btn" onclick="switchTab('promos')">🎁 Акции</button>
+      </div>
+
+      <!-- Prices Tab -->
+      <div class="tab-content active" id="pricesTab">
+        <div class="toolbar">
+          <div>
+            <button class="btn-save" id="saveBtn" onclick="savePrices()">💾 Сохранить все изменения</button>
+            <span class="unsaved-indicator" id="unsavedIndicator">✏️ Есть несохранённые изменения</span>
+          </div>
+          <div>
+            <button class="btn-reset" onclick="loadPrices()">↻ Сбросить</button>
+            <button class="btn-logout" onclick="logout()">🚪 Выйти</button>
+          </div>
         </div>
-        <div>
-          <button class="btn-reset" onclick="loadPrices()">↻ Сбросить</button>
-          <button class="btn-logout" onclick="logout()">🚪 Выйти</button>
+        <div id="tableContainer">
+          <div style="text-align:center;padding:40px;color:#999;">Загрузка...</div>
         </div>
       </div>
 
-      <div id="tableContainer">
-        <div style="text-align:center;padding:40px;color:#999;">Загрузка...</div>
+      <!-- Promos Tab -->
+      <div class="tab-content" id="promosTab">
+        <div class="toolbar">
+          <div>
+            <button class="btn-save" onclick="savePromos()">💾 Сохранить акции</button>
+            <button class="btn-save" style="background:#2e7d32;margin-left:8px;" onclick="addPromo()">+ Добавить акцию</button>
+          </div>
+          <div>
+            <button class="btn-reset" onclick="loadPromos()">↻ Сбросить</button>
+            <button class="btn-logout" onclick="logout()">🚪 Выйти</button>
+          </div>
+        </div>
+        <div id="promosContainer">
+          <div style="text-align:center;padding:40px;color:#999;">Загрузка...</div>
+        </div>
       </div>
     </div>
 
@@ -408,10 +456,103 @@
       if ((e.ctrlKey || e.metaKey) && e.key === 's') {
         e.preventDefault();
         if (document.getElementById('adminPanel').classList.contains('show')) {
-          savePrices();
+          if (document.getElementById('pricesTab').classList.contains('active')) savePrices();
+          else savePromos();
         }
       }
     });
+
+    // ---- PROMOS ----
+    const DEFAULT_PROMOS = [
+      { id: "promo-1", badge: "Акция", title: "Диагностика 1 500 ₽ + мойка", price: "1 500 ₽", desc: "Комплексная диагностика автомобиля. Включено: диагностика ходовой, тормозной, компьютерная диагностика ДВС/ABS/SRS, проверка жидкостей, проверка шин. Мойка — в подарок.", link: "/contacts/", btnText: "Записаться", btnClass: "btn-primary", sort_order: 1 },
+      { id: "promo-2", badge: "-30%", title: "Скидка 30% по воскресеньям", price: "", desc: "Каждое воскресенье — скидка 30% на все виды работ. Скидка не распространяется на запчасти и расходные материалы. Запись обязательна.", link: "/contacts/", btnText: "Узнать подробнее", btnClass: "btn-outline", sort_order: 2 },
+      { id: "promo-3", badge: "-25%", title: "Скидка 25% за гибкое время", price: "", desc: "Запишитесь в удобное для нас время — получите скидку 25% на все виды работ. Уточните свободные окна по телефону.", link: "tel:+74957223627", btnText: "Позвонить", btnClass: "btn-outline", sort_order: 3 },
+      { id: "promo-4", badge: "Комплекс", title: "После зимних дорог", price: "2 500 ₽", desc: "Комплекс «После зимы»: защитная полировка кузова + полировка фар и задних фонарей + уборка салона. Время выполнения: ~2–2,5 часа.", link: "/contacts/", btnText: "Записаться", btnClass: "btn-primary", sort_order: 4 },
+    ];
+
+    let promosData = [];
+    let originalPromosData = [];
+
+    function switchTab(tab) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      event.target.classList.add('active');
+      if (tab === 'prices') { document.getElementById('pricesTab').classList.add('active'); }
+      else { document.getElementById('promosTab').classList.add('active'); loadPromos(); }
+    }
+
+    function loadPromos() {
+      const container = document.getElementById('promosContainer');
+      container.innerHTML = '<div style="text-align:center;padding:40px;color:#999;">Загрузка...</div>';
+      const saved = localStorage.getItem('svk_promo_admin_data');
+      if (saved) {
+        try { promosData = JSON.parse(saved); } catch { promosData = JSON.parse(JSON.stringify(DEFAULT_PROMOS)); }
+      } else {
+        promosData = JSON.parse(JSON.stringify(DEFAULT_PROMOS));
+      }
+      originalPromosData = JSON.parse(JSON.stringify(promosData));
+      renderPromos();
+    }
+
+    function renderPromos() {
+      const container = document.getElementById('promosContainer');
+      if (promosData.length === 0) {
+        container.innerHTML = '<div style="text-align:center;padding:40px;color:#999;">Нет акций. Нажмите «Добавить акцию».</div>';
+        return;
+      }
+      let html = '';
+      promosData.sort((a,b)=>(a.sort_order||0)-(b.sort_order||0)).forEach((p, i) => {
+        html += '<div class="promo-card-edit"><div class="promo-card-header"><h4>Акция #' + (i+1) + '</h4><button class="btn-delete-promo" onclick="deletePromo(\'' + p.id + '\')">✕ Удалить</button></div>';
+        html += '<div class="field-row"><div class="field"><label>Бейдж</label><select class="badge-select" onchange="updatePromoField(\'' + p.id + '\',\'badge\',this.value)"><option value="Акция"' + (p.badge==='Акция'?' selected':'') + '>Акция</option><option value="-30%"' + (p.badge==='-30%'?' selected':'') + '>-30%</option><option value="-25%"' + (p.badge==='-25%'?' selected':'') + '>-25%</option><option value="Комплекс"' + (p.badge==='Комплекс'?' selected':'') + '>Комплекс</option><option value="Новинка"' + (p.badge==='Новинка'?' selected':'') + '>Новинка</option><option value="-20%"' + (p.badge==='-20%'?' selected':'') + '>-20%</option></select></div>';
+        html += '<div class="field"><label>Цена</label><input type="text" value="' + escapeHtml(p.price||'') + '" onchange="updatePromoField(\'' + p.id + '\',\'price\',this.value)" placeholder="Например: 1 500 ₽"></div></div>';
+        html += '<div class="field"><label>Заголовок</label><input type="text" value="' + escapeHtml(p.title||'') + '" onchange="updatePromoField(\'' + p.id + '\',\'title\',this.value)"></div>';
+        html += '<div class="field"><label>Описание</label><textarea rows="2" onchange="updatePromoField(\'' + p.id + '\',\'desc\',this.value)">' + escapeHtml(p.desc||'') + '</textarea></div>';
+        html += '<div class="field-row"><div class="field"><label>Ссылка кнопки</label><input type="text" value="' + escapeHtml(p.link||'') + '" onchange="updatePromoField(\'' + p.id + '\',\'link\',this.value)"></div>';
+        html += '<div class="field"><label>Текст кнопки</label><input type="text" value="' + escapeHtml(p.btnText||'') + '" onchange="updatePromoField(\'' + p.id + '\',\'btnText\',this.value)"></div></div>';
+        html += '<div class="field-row"><div class="field"><label>Класс кнопки</label><select class="badge-select" onchange="updatePromoField(\'' + p.id + '\',\'btnClass\',this.value)"><option value="btn-primary"' + (p.btnClass==='btn-primary'?' selected':'') + '>Синяя</option><option value="btn-outline"' + (p.btnClass==='btn-outline'?' selected':'') + '>Белая</option></select></div>';
+        html += '<div class="field"><label>Порядок</label><input type="number" value="' + (p.sort_order||0) + '" onchange="updatePromoField(\'' + p.id + '\',\'sort_order\',parseInt(this.value))"></div></div></div>';
+      });
+      container.innerHTML = html;
+    }
+
+    function updatePromoField(id, field, value) {
+      const p = promosData.find(x => x.id === id);
+      if (p) { p[field] = value; }
+    }
+
+    function addPromo() {
+      const id = 'promo-' + Date.now();
+      promosData.push({ id, badge: 'Акция', title: '', price: '', desc: '', link: '/contacts/', btnText: 'Подробнее', btnClass: 'btn-primary', sort_order: promosData.length + 1 });
+      renderPromos();
+    }
+
+    function deletePromo(id) {
+      if (!confirm('Удалить эту акцию?')) return;
+      promosData = promosData.filter(p => p.id !== id);
+      renderPromos();
+    }
+
+    function savePromos() {
+      const overlay = document.getElementById('loadingOverlay');
+      const status = document.getElementById('saveStatus');
+      overlay.classList.add('show');
+      status.className = 'save-status loading';
+      status.textContent = 'Сохранение...';
+      try {
+        localStorage.setItem('svk_promo_admin_data', JSON.stringify(promosData));
+        originalPromosData = JSON.parse(JSON.stringify(promosData));
+        setTimeout(() => {
+          overlay.classList.remove('show');
+          status.className = 'save-status success';
+          status.textContent = '✅ Акции сохранены!';
+          setTimeout(() => { status.className = 'save-status'; }, 3000);
+        }, 300);
+      } catch (err) {
+        overlay.classList.remove('show');
+        status.className = 'save-status error';
+        status.textContent = '❌ Ошибка: ' + err.message;
+      }
+    }
   </script>
 </body>
 </html>

@@ -67,3 +67,26 @@ permalink: /promo/
 <div class="section-cta" style="text-align: center; margin-top: calc(var(--gap) * 5);">
   <a href="/contacts/" class="btn btn-primary btn-lg">Записаться на сервис</a>
 </div>
+
+<script>
+(function(){
+  var saved = localStorage.getItem('svk_promo_admin_data');
+  if (!saved) return;
+  try { var promos = JSON.parse(saved); } catch(e) { return; }
+  if (!promos.length) return;
+  var grid = document.querySelector('.promo-section .grid, .grid.grid-2');
+  if (!grid) return;
+  grid.innerHTML = '';
+  promos.sort(function(a,b){ return (a.sort_order||0)-(b.sort_order||0); }).forEach(function(p){
+    var card = document.createElement('article');
+    card.className = 'promo-card';
+    var html = '<span class="promo-badge">' + p.badge + '</span>';
+    html += '<h3>' + p.title + '</h3>';
+    if (p.price) html += '<p class="promo-price">' + p.price + '</p>';
+    html += '<p>' + p.desc + '</p>';
+    html += '<a href="' + p.link + '" class="btn ' + p.btnClass + '">' + p.btnText + '</a>';
+    card.innerHTML = html;
+    grid.appendChild(card);
+  });
+})();
+</script>
