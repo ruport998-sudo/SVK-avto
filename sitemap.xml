@@ -12,6 +12,66 @@
     <changefreq>weekly</changefreq>
   </url>
   <url>
+    <loc>https://svk-avto.ru/services/to-na-kutuzovskom/</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://svk-avto.ru/services/remont-dvigatelya-na-kutuzovskom/</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://svk-avto.ru/services/diagnostika-na-kutuzovskom/</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://svk-avto.ru/services/remont-hodovoj-na-kutuzovskom/</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://svk-avto.ru/services/remont-tormozov-na-kutuzovskom/</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://svk-avto.ru/services/remont-akpp-na-kutuzovskom/</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://svk-avto.ru/services/shinomontazh-na-kutuzovskom/</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://svk-avto.ru/services/skhod-razval-na-kutuzovskom/</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://svk-avto.ru/services/zapravka-konditsionera-na-kutuzovskom/</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://svk-avto.ru/services/kuzovnoj-remont-na-kutuzovskom/</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://svk-avto.ru/services/polirovka-kuzova-na-kutuzovskom/</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://svk-avto.ru/services/ustanovka-signalizacii-na-kutuzovskom/</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://svk-avto.ru/prices/</loc>
     <priority>0.8</priority>
     <changefreq>weekly</changefreq>
